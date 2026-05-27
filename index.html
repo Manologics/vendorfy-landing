@@ -4,21 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vendorfy — Scan It. Tag It. Sell It.</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #080810;
-  --surface: #0e0e1a;
-  --card: #13131f;
-  --border: rgba(255,255,255,0.07);
-  --accent: #E8D5A3;
+  --bg: #08080f;
+  --surface: #0d0d1a;
+  --card: #111120;
+  --border: rgba(255,255,255,0.06);
+  --accent: #C8A96E;
   --accent-dim: rgba(200,169,110,0.1);
-  --purple: #7B5EA7;
-  --purple-glow: rgba(123,94,167,0.2);
-  --white: #f0f0f8;
-  --muted: rgba(240,240,248,0.4);
+  --accent-border: rgba(200,169,110,0.2);
+  --purple: rgba(100,80,160,0.15);
+  --white: #ededf5;
+  --muted: rgba(237,237,245,0.38);
   --syne: 'Syne', sans-serif;
   --serif: 'Instrument Serif', serif;
   --body: 'DM Sans', sans-serif;
@@ -34,16 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* GRAIN */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-}
-
 /* NAV */
 nav {
   position: fixed;
@@ -52,80 +42,74 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 32px;
-  background: rgba(8,8,16,0.7);
-  backdrop-filter: blur(20px);
+  padding: 18px 28px;
+  background: rgba(8,8,15,0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border);
 }
 
 .nav-logo {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   letter-spacing: -0.01em;
   color: var(--white);
 }
 
 .nav-logo span { color: var(--accent); }
 
-.nav-links {
-  display: none;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  font-size: 0.85rem;
-  color: var(--muted);
-  text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--white); }
-
 .nav-cta {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.06);
   color: var(--white);
   font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.82rem;
+  font-weight: 600;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
-  padding: 10px 22px;
-  border: 1px solid rgba(255,255,255,0.12);
+  padding: 9px 20px;
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
-  transition: opacity 0.15s, transform 0.1s;
+  display: inline-block;
+  transition: background 0.2s, border-color 0.2s;
 }
 
-.nav-cta:active { transform: scale(0.97); opacity: 0.9; }
+.nav-cta:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.18);
+}
 
 /* TICKER */
 .ticker-wrap {
   overflow: hidden;
-  background: var(--accent);
-  padding: 10px 0;
-  margin-top: 61px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  padding: 11px 0;
+  margin-top: 57px;
 }
 
-.ticker {
+.ticker-track {
   display: flex;
-  animation: ticker 20s linear infinite;
+  animation: ticker 28s linear infinite;
   white-space: nowrap;
 }
 
 .ticker-item {
   font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(240,240,248,0.35);
-  padding: 0 28px;
+  color: var(--muted);
+  padding: 0 24px;
+  flex-shrink: 0;
 }
 
-.ticker-sep { color: rgba(0,0,0,0.3); }
+.ticker-dot {
+  color: var(--accent);
+  opacity: 0.5;
+}
 
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -135,67 +119,72 @@ nav {
 /* HERO */
 .hero {
   position: relative;
-  min-height: 96svh;
+  min-height: 95svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 32px 60px;
+  padding: 80px 28px 64px;
   overflow: hidden;
 }
 
-.hero-orb-1 {
+.orb {
   position: absolute;
-  top: -200px; right: -100px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(123,94,167,0.25) 0%, transparent 65%);
+  border-radius: 50%;
   pointer-events: none;
+  filter: blur(80px);
 }
 
-.hero-orb-2 {
-  position: absolute;
-  bottom: -100px; left: -150px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(245,200,66,0.08) 0%, transparent 65%);
-  pointer-events: none;
+.orb-1 {
+  top: -120px; right: -80px;
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(100,80,180,0.18) 0%, transparent 70%);
 }
 
-.hero-tag {
+.orb-2 {
+  bottom: -60px; left: -100px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+}
+
+.hero-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--accent-dim);
-  border: 1px solid rgba(245,200,66,0.2);
+  border: 1px solid var(--accent-border);
   border-radius: 100px;
-  padding: 6px 14px;
-  font-family: var(--syne);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 28px;
+  padding: 6px 14px 6px 8px;
+  margin-bottom: 32px;
   width: fit-content;
-  animation: fadeUp 0.6s ease 0.1s both;
+  animation: fadeUp 0.7s ease 0.1s both;
 }
 
-.hero-tag::before {
-  content: '';
+.hero-pill-dot {
   width: 6px; height: 6px;
   background: var(--accent);
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.hero-headline {
+.hero-pill span {
+  font-family: var(--syne);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: clamp(2.8rem, 11vw, 5.5rem);
-  line-height: 1.0;
+  font-size: clamp(3rem, 12vw, 5.5rem);
+  line-height: 0.97;
   letter-spacing: -0.03em;
-  margin-bottom: 24px;
-  animation: fadeUp 0.6s ease 0.2s both;
+  margin-bottom: 28px;
+  animation: fadeUp 0.7s ease 0.2s both;
 }
 
-.hero-headline em {
+h1 em {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
@@ -203,50 +192,50 @@ nav {
 }
 
 .hero-sub {
-  font-size: 1rem;
+  font-size: 0.98rem;
   line-height: 1.7;
   color: var(--muted);
-  max-width: 440px;
+  max-width: 400px;
   margin-bottom: 40px;
   font-weight: 300;
-  animation: fadeUp 0.6s ease 0.3s both;
+  animation: fadeUp 0.7s ease 0.3s both;
 }
 
-.hero-actions {
+.hero-btns {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 340px;
-  animation: fadeUp 0.6s ease 0.4s both;
+  max-width: 320px;
+  animation: fadeUp 0.7s ease 0.4s both;
 }
 
-.btn-primary {
+.btn-gold {
   background: var(--accent);
-  color: #000;
+  color: #1a1408;
   font-family: var(--syne);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 0.03em;
-  padding: 16px 28px;
+  padding: 15px 28px;
   border: none;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
   display: block;
   text-align: center;
-  transition: opacity 0.15s, transform 0.1s;
+  transition: opacity 0.15s;
 }
 
-.btn-primary:active { transform: scale(0.98); }
+.btn-gold:hover { opacity: 0.9; }
 
-.btn-ghost {
+.btn-outline {
   background: transparent;
   color: var(--white);
   font-family: var(--syne);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 0.03em;
-  padding: 15px 28px;
+  padding: 14px 28px;
   border: 1px solid var(--border);
   border-radius: 100px;
   cursor: pointer;
@@ -256,284 +245,277 @@ nav {
   transition: border-color 0.2s;
 }
 
-.btn-ghost:hover { border-color: rgba(255,255,255,0.2); }
+.btn-outline:hover { border-color: rgba(255,255,255,0.15); }
 
-.hero-trust {
-  margin-top: 32px;
-  font-size: 0.75rem;
+.hero-meta {
+  margin-top: 28px;
+  font-size: 0.72rem;
   color: var(--muted);
-  letter-spacing: 0.04em;
-  animation: fadeUp 0.6s ease 0.5s both;
+  letter-spacing: 0.05em;
+  animation: fadeUp 0.7s ease 0.5s both;
 }
 
-/* STATS BAR */
-.stats {
+/* STATS */
+.stats-bar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
+  background: var(--surface);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 
-.stat {
-  background: var(--surface);
-  padding: 28px 24px;
+.stat-item {
+  padding: 28px 20px;
   text-align: center;
+  border-right: 1px solid var(--border);
 }
 
-.stat-num {
+.stat-item:last-child { border-right: none; }
+
+.stat-val {
+  display: block;
   font-family: var(--syne);
   font-weight: 800;
-  font-size: 1.8rem;
-  letter-spacing: -0.02em;
+  font-size: 1.7rem;
+  letter-spacing: -0.03em;
   color: var(--accent);
-  display: block;
   margin-bottom: 4px;
 }
 
-.stat-label {
-  font-size: 0.72rem;
+.stat-lbl {
+  font-size: 0.65rem;
   color: var(--muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: var(--syne);
 }
 
 /* SECTIONS */
-section {
+.sec {
+  padding: 80px 28px;
   position: relative;
-  padding: 80px 32px;
 }
 
-.section-tag {
+.sec-alt { background: var(--surface); }
+
+.sec-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--syne);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
-.section-tag::before {
+.sec-tag::before {
   content: '';
-  width: 20px; height: 1px;
+  display: block;
+  width: 18px; height: 1px;
   background: var(--accent);
+  flex-shrink: 0;
 }
 
-.section-title {
+.sec-title {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: clamp(1.8rem, 6vw, 2.8rem);
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  margin-bottom: 48px;
+  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin-bottom: 44px;
 }
 
-.section-title em {
+.sec-title em {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
-  color: var(--muted);
+  color: rgba(237,237,245,0.35);
 }
 
-/* HOW IT WORKS */
+/* STEPS */
 .steps {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  background: var(--border);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
 }
 
-.step {
+.step-row {
   display: flex;
-  gap: 24px;
+  gap: 20px;
   align-items: flex-start;
-  padding: 28px 24px;
+  padding: 26px 22px;
   background: var(--card);
+  border-bottom: 1px solid var(--border);
   transition: background 0.2s;
 }
 
-.step:hover { background: #17172a; }
+.step-row:last-child { border-bottom: none; }
+.step-row:hover { background: #14142a; }
 
-.step-num {
+.step-n {
   font-family: var(--syne);
-  font-weight: 800;
-  font-size: 0.7rem;
+  font-weight: 700;
+  font-size: 0.62rem;
   letter-spacing: 0.1em;
   color: var(--accent);
   background: var(--accent-dim);
-  border: 1px solid rgba(245,200,66,0.2);
+  border: 1px solid var(--accent-border);
   border-radius: 100px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
-.step h3 {
+.step-row h3 {
   font-family: var(--syne);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
 }
 
-.step p {
-  font-size: 0.85rem;
+.step-row p {
+  font-size: 0.82rem;
   color: var(--muted);
   line-height: 1.6;
   font-weight: 300;
 }
 
 /* FEATURES */
-.features-grid {
+.feat-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
 }
 
-.feature {
+.feat-cell {
+  padding: 26px 20px;
   background: var(--card);
-  padding: 28px 22px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   transition: background 0.2s;
 }
 
-.feature:hover { background: #17172a; }
+.feat-cell:nth-child(2n) { border-right: none; }
+.feat-cell:nth-last-child(-n+2) { border-bottom: none; }
+.feat-cell:hover { background: #14142a; }
 
-.feature-icon {
-  font-size: 1.4rem;
-  margin-bottom: 12px;
+.feat-icon {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
   display: block;
 }
 
-.feature h4 {
+.feat-cell h4 {
   font-family: var(--syne);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin-bottom: 5px;
   letter-spacing: -0.01em;
-  margin-bottom: 6px;
 }
 
-.feature p {
-  font-size: 0.78rem;
+.feat-cell p {
+  font-size: 0.75rem;
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.5;
   font-weight: 300;
 }
 
 /* PRICING */
-.pricing-bg {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.pricing-grid {
+.price-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 0;
+  gap: 14px;
 }
 
 .price-card {
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
   background: var(--card);
-  padding: 36px 28px;
+  padding: 32px 26px;
   position: relative;
   overflow: hidden;
 }
 
-.price-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+.price-card.hot {
+  border-color: var(--accent-border);
+  background: linear-gradient(140deg, #12121f 0%, #161228 100%);
 }
 
-.price-card.featured {
-  border-color: rgba(245,200,66,0.3);
-  background: linear-gradient(135deg, #15152a 0%, #1a1428 100%);
-}
-
-.price-card.featured::after {
+.price-card.hot::before {
   content: '';
   position: absolute;
-  top: -80px; right: -80px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(123,94,167,0.2) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(100,80,180,0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.plan-badge {
+.hot-badge {
   display: inline-block;
   background: var(--accent);
-  color: #000;
+  color: #1a1408;
   font-family: var(--syne);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 4px 12px;
   border-radius: 100px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .plan-name {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   letter-spacing: -0.02em;
   margin-bottom: 6px;
 }
 
-.plan-price {
+.plan-amt {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: 3.2rem;
+  font-size: 3rem;
   letter-spacing: -0.04em;
   line-height: 1;
   color: var(--accent);
-  margin-bottom: 4px;
 }
 
-.plan-price sup {
-  font-size: 1.4rem;
+.plan-amt sup {
+  font-size: 1.3rem;
   vertical-align: super;
   letter-spacing: 0;
 }
 
-.plan-period {
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 28px;
+.plan-per {
   font-family: var(--syne);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 26px;
+  margin-top: 2px;
 }
 
-.plan-features {
+.plan-list {
   list-style: none;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-.plan-features li {
-  font-size: 0.85rem;
-  color: rgba(240,240,248,0.75);
+.plan-list li {
+  font-size: 0.82rem;
+  color: rgba(237,237,245,0.7);
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -541,176 +523,164 @@ section {
   font-weight: 300;
 }
 
-.plan-features li::before {
+.plan-list li::before {
   content: '✦';
   color: var(--accent);
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   flex-shrink: 0;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
-.stripe-note {
+.stripe-line {
+  margin-top: 14px;
+  font-size: 0.68rem;
+  color: var(--muted);
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  font-size: 0.7rem;
-  color: var(--muted);
-  letter-spacing: 0.04em;
+  gap: 6px;
 }
 
 /* PROOF */
-.proof-bg {
-  background: #0a0a14;
-  border-top: 1px solid var(--border);
-}
-
 .proof-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 48px;
+  gap: 14px;
 }
 
 .proof-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 28px 24px;
-  position: relative;
+  padding: 26px 22px;
 }
 
-.proof-quote {
+.stars {
+  color: var(--accent);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.quote {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.05rem;
+  font-size: 1rem;
   line-height: 1.65;
-  color: rgba(240,240,248,0.85);
-  margin-bottom: 20px;
+  color: rgba(237,237,245,0.8);
+  margin-bottom: 18px;
 }
 
-.proof-author {
+.author {
   font-family: var(--syne);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
 }
 
-.proof-stars {
-  color: var(--accent);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
 /* FAQ */
-.faq-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border);
+.faq-wrap {
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  margin-top: 48px;
 }
 
 details {
   background: var(--card);
-  transition: background 0.2s;
+  border-bottom: 1px solid var(--border);
 }
 
-details[open] { background: #15152a; }
+details:last-child { border-bottom: none; }
+details[open] { background: #12122a; }
 
 summary {
   font-family: var(--syne);
   font-weight: 600;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   letter-spacing: -0.01em;
-  padding: 22px 24px;
+  padding: 22px 22px;
   cursor: pointer;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  gap: 16px;
 }
 
 summary::-webkit-details-marker { display: none; }
 
-summary::after {
-  content: '+';
+.faq-icon {
   font-family: var(--syne);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--accent);
   transition: transform 0.2s;
   flex-shrink: 0;
-  margin-left: 16px;
+  font-weight: 300;
 }
 
-details[open] summary::after { transform: rotate(45deg); }
+details[open] .faq-icon { transform: rotate(45deg); }
 
 details p {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: var(--muted);
   line-height: 1.7;
-  padding: 0 24px 22px;
+  padding: 0 22px 22px;
   font-weight: 300;
 }
 
 /* FINAL CTA */
-.final-cta {
+.cta-sec {
   text-align: center;
-  padding: 100px 32px;
+  padding: 100px 28px;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid var(--border);
 }
 
-.final-cta-orb {
+.cta-orb {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px; height: 400px;
-  background: radial-gradient(ellipse, rgba(123,94,167,0.2) 0%, transparent 65%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(100,80,180,0.15) 0%, transparent 65%);
   pointer-events: none;
+  filter: blur(40px);
 }
 
-.final-cta h2 {
+.cta-sec h2 {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-size: clamp(2rem, 8vw, 3.2rem);
   letter-spacing: -0.03em;
   line-height: 1.05;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   position: relative;
 }
 
-.final-cta h2 em {
+.cta-sec h2 em {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
   color: var(--accent);
 }
 
-.final-cta p {
-  font-size: 0.95rem;
+.cta-sec p {
+  font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 40px;
   font-weight: 300;
+  max-width: 320px;
+  margin: 0 auto 36px;
+  line-height: 1.65;
   position: relative;
-  max-width: 360px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
 }
 
-.final-actions {
+.cta-btns {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 300px;
+  max-width: 280px;
   margin: 0 auto;
   position: relative;
 }
@@ -719,259 +689,188 @@ details p {
 footer {
   background: var(--bg);
   border-top: 1px solid var(--border);
-  padding: 40px 32px;
+  padding: 40px 28px;
   text-align: center;
 }
 
-.footer-logo {
+.foot-logo {
   font-family: var(--syne);
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: -0.01em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
-.footer-logo span { color: var(--accent); }
+.foot-logo span { color: var(--accent); }
 
-.footer-tagline {
+.foot-tag {
   font-family: var(--syne);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
-.footer-links {
+.foot-links {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  margin-bottom: 24px;
+  gap: 20px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
-.footer-links a {
-  font-size: 0.72rem;
+.foot-links a {
+  font-size: 0.7rem;
   color: var(--muted);
   text-decoration: none;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 
-.footer-links a:hover { color: var(--white); }
+.foot-links a:hover { color: var(--white); }
 
-.footer-copy {
-  font-size: 0.68rem;
-  color: rgba(240,240,248,0.2);
-  letter-spacing: 0.04em;
+.foot-copy {
+  font-size: 0.65rem;
+  color: rgba(237,237,245,0.15);
 }
 
 /* ANIMATIONS */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-/* DIVIDER */
-.divider {
-  width: 40px;
-  height: 1px;
-  background: var(--border);
-  margin: 0 auto 48px;
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">Vendor<span>fy</span></div>
   <a href="#pricing" class="nav-cta">Start Selling</a>
 </nav>
 
-<!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker">
-    <span class="ticker-item">Swap Meet Vendors <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Flea Markets <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Resellers <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Pop-Up Shops <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Estate Sales <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Local Merchants <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Thrift Flippers <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Swap Meet Vendors <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Flea Markets <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Resellers <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Pop-Up Shops <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Estate Sales <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Local Merchants <span class="ticker-sep">✦</span></span>
-    <span class="ticker-item">Thrift Flippers <span class="ticker-sep">✦</span></span>
+  <div class="ticker-track">
+    <span class="ticker-item">Swap Meet Vendors <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Flea Markets <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Resellers <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Pop-Up Shops <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Estate Sales <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Local Merchants <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Thrift Flippers <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Swap Meet Vendors <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Flea Markets <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Resellers <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Pop-Up Shops <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Estate Sales <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Local Merchants <span class="ticker-dot">✦</span></span>
+    <span class="ticker-item">Thrift Flippers <span class="ticker-dot">✦</span></span>
   </div>
 </div>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-orb-1"></div>
-  <div class="hero-orb-2"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
-  <div class="hero-tag">AI-Powered Selling System</div>
-
-  <h1 class="hero-headline">
-    Scan It.<br>
-    Tag It.<br>
-    <em>Sell It.</em>
-  </h1>
-
-  <p class="hero-sub">
-    Stop writing listings by hand. Vendorfy turns any product into a scannable smart store in seconds — from your phone, at your booth.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#pricing" class="btn-primary">Get Started — $49/mo</a>
-    <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+  <div class="hero-pill">
+    <div class="hero-pill-dot"></div>
+    <span>AI-Powered Selling System</span>
   </div>
 
-  <p class="hero-trust">No contracts &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; Mobile-first</p>
+  <h1>Scan It.<br>Tag It.<br><em>Sell It.</em></h1>
+
+  <p class="hero-sub">Stop writing listings by hand. Vendorfy turns any product into a scannable smart store in seconds — from your phone, at your booth.</p>
+
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-gold">Get Started — $49/mo</a>
+    <a href="#how-it-works" class="btn-outline">See How It Works</a>
+  </div>
+
+  <p class="hero-meta">No contracts &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; Mobile-first</p>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <span class="stat-num">5s</span>
-    <span class="stat-label">To list a product</span>
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-val">5s</span>
+    <span class="stat-lbl">To list a product</span>
   </div>
-  <div class="stat">
-    <span class="stat-num">QR</span>
-    <span class="stat-label">Every item</span>
+  <div class="stat-item">
+    <span class="stat-val">QR</span>
+    <span class="stat-lbl">Every item</span>
   </div>
-  <div class="stat">
-    <span class="stat-num">100%</span>
-    <span class="stat-label">Mobile-first</span>
+  <div class="stat-item">
+    <span class="stat-val">100%</span>
+    <span class="stat-lbl">Mobile-first</span>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
-<section id="how-it-works">
-  <div class="section-tag">The Process</div>
-  <h2 class="section-title">From scan to sale<br><em>in minutes</em></h2>
-
+<section class="sec" id="how-it-works">
+  <div class="sec-tag">The Process</div>
+  <h2 class="sec-title">From scan to sale<br><em>in minutes</em></h2>
   <div class="steps">
-    <div class="step">
-      <span class="step-num">01</span>
-      <div>
-        <h3>Scan the Barcode</h3>
-        <p>Point your phone at any UPC or barcode. Vendorfy pulls product data instantly — or snap a photo and let AI do the rest.</p>
-      </div>
+    <div class="step-row">
+      <span class="step-n">01</span>
+      <div><h3>Scan the Barcode</h3><p>Point your phone at any UPC. Vendorfy pulls product data instantly — or snap a photo and let AI fill it in.</p></div>
     </div>
-    <div class="step">
-      <span class="step-num">02</span>
-      <div>
-        <h3>AI Builds Your Listing</h3>
-        <p>Title, description, category, and pricing — generated automatically. Review and approve in seconds.</p>
-      </div>
+    <div class="step-row">
+      <span class="step-n">02</span>
+      <div><h3>AI Builds Your Listing</h3><p>Title, description, category, and pricing — generated automatically. Review and approve in seconds.</p></div>
     </div>
-    <div class="step">
-      <span class="step-num">03</span>
-      <div>
-        <h3>QR Code Generated</h3>
-        <p>Every product gets a scannable QR. Print it, stick it on the item, or display it at your table.</p>
-      </div>
+    <div class="step-row">
+      <span class="step-n">03</span>
+      <div><h3>QR Code Generated</h3><p>Every product gets a scannable QR. Print it, stick it on the item, or display it at your table.</p></div>
     </div>
-    <div class="step">
-      <span class="step-num">04</span>
-      <div>
-        <h3>Buyer Scans & Buys</h3>
-        <p>Customers scan, see your product page, and contact you or buy directly. Leads captured automatically.</p>
-      </div>
+    <div class="step-row">
+      <span class="step-n">04</span>
+      <div><h3>Buyer Scans & Buys</h3><p>Customers scan, see your product page, and contact you or buy directly. Leads captured automatically.</p></div>
     </div>
-    <div class="step">
-      <span class="step-num">05</span>
-      <div>
-        <h3>Inventory Updates Live</h3>
-        <p>Your dashboard tracks every item. Know what's sold, what's live, and what needs attention — from anywhere.</p>
-      </div>
+    <div class="step-row">
+      <span class="step-n">05</span>
+      <div><h3>Inventory Updates Live</h3><p>Your dashboard tracks everything. Know what's sold, what's live, what needs attention — from anywhere.</p></div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section>
-  <div class="section-tag">What You Get</div>
-  <h2 class="section-title">Built for<br><em>the booth</em></h2>
-
-  <div class="features-grid">
-    <div class="feature">
-      <span class="feature-icon">📷</span>
-      <h4>Barcode Scan</h4>
-      <p>Instant UPC lookup from your phone camera.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🤖</span>
-      <h4>AI Listings</h4>
-      <p>Auto-generated titles, descriptions & pricing.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📲</span>
-      <h4>QR Codes</h4>
-      <p>One per product. Scannable by any phone.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">🛒</span>
-      <h4>Public Pages</h4>
-      <p>Each product gets its own shareable page.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📬</span>
-      <h4>Lead Capture</h4>
-      <p>Buyer info logged every time they reach out.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📦</span>
-      <h4>Inventory Dash</h4>
-      <p>Track all products from one screen.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📤</span>
-      <h4>CSV Export</h4>
-      <p>Download your full inventory anytime.</p>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">📱</span>
-      <h4>Mobile-First</h4>
-      <p>Works perfectly from any phone. No app needed.</p>
-    </div>
+<section class="sec sec-alt">
+  <div class="sec-tag">What You Get</div>
+  <h2 class="sec-title">Built for<br><em>the booth</em></h2>
+  <div class="feat-grid">
+    <div class="feat-cell"><span class="feat-icon">📷</span><h4>Barcode Scan</h4><p>Instant UPC lookup from your phone camera.</p></div>
+    <div class="feat-cell"><span class="feat-icon">🤖</span><h4>AI Listings</h4><p>Auto-generated titles, descriptions & pricing.</p></div>
+    <div class="feat-cell"><span class="feat-icon">📲</span><h4>QR Codes</h4><p>One per product. Scannable by any phone.</p></div>
+    <div class="feat-cell"><span class="feat-icon">🛒</span><h4>Public Pages</h4><p>Each product gets its own shareable page.</p></div>
+    <div class="feat-cell"><span class="feat-icon">📬</span><h4>Lead Capture</h4><p>Buyer info logged every time they reach out.</p></div>
+    <div class="feat-cell"><span class="feat-icon">📦</span><h4>Inventory Dash</h4><p>Track all products from one screen.</p></div>
+    <div class="feat-cell"><span class="feat-icon">📤</span><h4>CSV Export</h4><p>Download your full inventory anytime.</p></div>
+    <div class="feat-cell"><span class="feat-icon">📱</span><h4>Mobile-First</h4><p>Works perfectly from any phone. No app needed.</p></div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing" class="pricing-bg">
-  <div class="section-tag">Simple Pricing</div>
-  <h2 class="section-title">Pick your<br><em>plan</em></h2>
-
-  <div class="pricing-grid">
+<section class="sec" id="pricing">
+  <div class="sec-tag">Simple Pricing</div>
+  <h2 class="sec-title">Pick your<br><em>plan</em></h2>
+  <div class="price-cards">
     <div class="price-card">
       <div class="plan-name">Starter</div>
-      <div class="plan-price"><sup>$</sup>49</div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
+      <div class="plan-amt"><sup>$</sup>49</div>
+      <div class="plan-per">per month</div>
+      <ul class="plan-list">
         <li>Up to 100 active products</li>
         <li>Barcode scan + AI listing builder</li>
         <li>QR code generation</li>
         <li>Public product pages</li>
         <li>Lead capture + basic dashboard</li>
-        <li>CSV export</li>
-        <li>Mobile-optimized</li>
+        <li>CSV export · Mobile-optimized</li>
       </ul>
-      <a href="#" class="btn-ghost">Get Starter</a>
-      <div class="stripe-note">🔒 Secure checkout via Stripe</div>
+      <a href="#" class="btn-outline">Get Starter</a>
+      <div class="stripe-line">🔒 Secure checkout via Stripe · Cancel anytime</div>
     </div>
-
-    <div class="price-card featured">
-      <div class="plan-badge">Most Popular</div>
+    <div class="price-card hot">
+      <div class="hot-badge">Most Popular</div>
       <div class="plan-name">Pro</div>
-      <div class="plan-price"><sup>$</sup>99</div>
-      <div class="plan-period">per month</div>
-      <ul class="plan-features">
+      <div class="plan-amt"><sup>$</sup>99</div>
+      <div class="plan-per">per month</div>
+      <ul class="plan-list">
         <li>Unlimited products</li>
         <li>Everything in Starter</li>
         <li>AI photo background removal</li>
@@ -981,91 +880,81 @@ footer {
         <li>Early access to new features</li>
         <li>Priority support</li>
       </ul>
-      <a href="#" class="btn-primary">Get Pro</a>
-      <div class="stripe-note">🔒 Secure checkout via Stripe</div>
+      <a href="#" class="btn-gold">Get Pro</a>
+      <div class="stripe-line">🔒 Secure checkout via Stripe · Cancel anytime</div>
     </div>
   </div>
 </section>
 
-<!-- PROOF -->
-<section class="proof-bg">
-  <div class="section-tag">Real Vendors</div>
-  <h2 class="section-title">They said it.<br><em>Not us.</em></h2>
-
+<section class="sec sec-alt">
+  <div class="sec-tag">Real Vendors</div>
+  <h2 class="sec-title">They said it.<br><em>Not us.</em></h2>
   <div class="proof-cards">
     <div class="proof-card">
-      <div class="proof-stars">★★★★★</div>
-      <p class="proof-quote">"I used to spend 2 hours every Sunday writing listings. Now I do it in 15 minutes at the booth. The QR code thing alone is worth it."</p>
-      <div class="proof-author">— Maria T., Phoenix Park & Swap</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"I used to spend 2 hours every Sunday writing listings. Now I do it in 15 minutes at the booth. The QR code thing alone is worth it."</p>
+      <div class="author">— Maria T., Phoenix Park & Swap</div>
     </div>
     <div class="proof-card">
-      <div class="proof-stars">★★★★★</div>
-      <p class="proof-quote">"My customers pull out their phone, scan, and I get a lead notification before they even walk away. This is how you sell in 2025."</p>
-      <div class="proof-author">— D. Reyes, Glendale Flea Market</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"My customers pull out their phone, scan, and I get a lead notification before they even walk away. This is how you sell."</p>
+      <div class="author">— D. Reyes, Glendale Flea Market</div>
     </div>
     <div class="proof-card">
-      <div class="proof-stars">★★★★★</div>
-      <p class="proof-quote">"Set up 40 products in one afternoon. The AI descriptions are better than what I was writing myself. I'm not going back."</p>
-      <div class="proof-author">— J. Brooks, Mesa Reseller</div>
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Set up 40 products in one afternoon. The AI descriptions are better than what I was writing myself. I'm not going back."</p>
+      <div class="author">— J. Brooks, Mesa Reseller</div>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section>
-  <div class="section-tag">Questions</div>
-  <h2 class="section-title">Got<br><em>answers</em></h2>
-
-  <div class="faq-list">
-    <details>
-      <summary>Do I need to install an app?</summary>
+<section class="sec">
+  <div class="sec-tag">Questions</div>
+  <h2 class="sec-title">Got<br><em>answers</em></h2>
+  <div class="faq-wrap">
+    <details open>
+      <summary>Do I need to install an app? <span class="faq-icon">+</span></summary>
       <p>No. Vendorfy is fully web-based. Works on any phone browser — iPhone or Android — no download required.</p>
     </details>
     <details>
-      <summary>What if my product doesn't have a barcode?</summary>
-      <p>No problem. Take a photo or enter product info manually. The AI still generates your listing from there.</p>
+      <summary>What if my product doesn't have a barcode? <span class="faq-icon">+</span></summary>
+      <p>No problem. Take a photo or enter product info manually. The AI still generates your full listing from there.</p>
     </details>
     <details>
-      <summary>How do the QR codes work?</summary>
-      <p>Each product gets a unique QR code you can print or display. When a customer scans it, they see a live product page with your listing, photos, and a way to contact or buy from you.</p>
+      <summary>How do the QR codes work? <span class="faq-icon">+</span></summary>
+      <p>Each product gets a unique QR code you can print or display. When a customer scans it they see a live product page with listing, photos, and a way to contact or buy from you.</p>
     </details>
     <details>
-      <summary>Can I cancel anytime?</summary>
+      <summary>Can I cancel anytime? <span class="faq-icon">+</span></summary>
       <p>Yes. No contracts, no cancellation fees. Cancel directly from your account in under 60 seconds.</p>
     </details>
     <details>
-      <summary>What's the difference between Starter and Pro?</summary>
+      <summary>What's the difference between Starter and Pro? <span class="faq-icon">+</span></summary>
       <p>Starter is perfect for vendors with up to 100 products. Pro removes all limits, adds AI photo enhancement, and gives you advanced inventory and lead management.</p>
     </details>
-    <details>
-      <summary>Is this built for mobile use at a booth?</summary>
-      <p>100%. The entire product was designed around the swap meet workflow — scan, list, and manage everything from your phone while you're set up at your table.</p>
-    </details>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="final-cta">
-  <div class="final-cta-orb"></div>
+<section class="cta-sec">
+  <div class="cta-orb"></div>
   <h2>Stop writing.<br><em>Start selling.</em></h2>
   <p>Join vendors already using Vendorfy to list faster, capture more leads, and run a smarter booth.</p>
-  <div class="final-actions">
-    <a href="#pricing" class="btn-primary">Get Started Today</a>
-    <a href="#how-it-works" class="btn-ghost">Learn More</a>
+  <div class="cta-btns">
+    <a href="#pricing" class="btn-gold">Get Started Today</a>
+    <a href="#how-it-works" class="btn-outline">Learn More</a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Vendor<span>fy</span></div>
-  <div class="footer-tagline">Scan It · Tag It · Sell It</div>
-  <div class="footer-links">
+  <div class="foot-logo">Vendor<span>fy</span></div>
+  <div class="foot-tag">Scan It · Tag It · Sell It</div>
+  <div class="foot-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
     <a href="#">Support</a>
     <a href="mailto:hello@vendorfyai.com">Contact</a>
   </div>
-  <div class="footer-copy">© 2025 Vendorfy AI — A Monkee Bizznus Company &nbsp;·&nbsp; vendorfyai.com</div>
+  <div class="foot-copy">© 2025 Vendorfy AI — A Monkee Bizznus Company · vendorfyai.com</div>
 </footer>
 
 </body>
