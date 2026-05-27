@@ -1,860 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Vendorfy — Scan It. Tag It. Sell It.</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Lora:ital,wght@0,400;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --bg: #08080f;
-  --surface: #0d0d1a;
-  --card: #111120;
-  --border: rgba(255,255,255,0.06);
-  --accent: #C8A96E;
-  --accent-dim: rgba(200,169,110,0.1);
-  --accent-border: rgba(200,169,110,0.2);
-  --purple: rgba(100,80,160,0.15);
-  --white: #ededf5;
-  --muted: rgba(237,237,245,0.38);
-  --syne: 'Syne', sans-serif;
-  --serif: 'Instrument Serif', serif;
-  --body: 'DM Sans', sans-serif;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: var(--body);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 28px;
-  background: rgba(8,8,15,0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: 1.2rem;
-  letter-spacing: -0.01em;
-  color: var(--white);
-}
-
-.nav-logo span { color: var(--accent); }
-
-.nav-cta {
-  background: rgba(255,255,255,0.06);
-  color: var(--white);
-  font-family: var(--syne);
-  font-weight: 600;
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-  padding: 9px 20px;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.nav-cta:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.18);
-}
-
-/* TICKER */
-.ticker-wrap {
-  overflow: hidden;
-  border-bottom: 1px solid var(--border);
-  background: rgba(255,255,255,0.02);
-  padding: 11px 0;
-  margin-top: 57px;
-}
-
-.ticker-track {
-  display: flex;
-  animation: ticker 28s linear infinite;
-  white-space: nowrap;
-}
-
-.ticker-item {
-  font-family: var(--syne);
-  font-weight: 600;
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 0 24px;
-  flex-shrink: 0;
-}
-
-.ticker-dot {
-  color: var(--accent);
-  opacity: 0.5;
-}
-
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* HERO */
-.hero {
-  position: relative;
-  min-height: 95svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 28px 64px;
-  overflow: hidden;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(80px);
-}
-
-.orb-1 {
-  top: -120px; right: -80px;
-  width: 480px; height: 480px;
-  background: radial-gradient(circle, rgba(100,80,180,0.18) 0%, transparent 70%);
-}
-
-.orb-2 {
-  bottom: -60px; left: -100px;
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
-}
-
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid var(--accent-border);
-  border-radius: 100px;
-  padding: 6px 14px 6px 8px;
-  margin-bottom: 32px;
-  width: fit-content;
-  animation: fadeUp 0.7s ease 0.1s both;
-}
-
-.hero-pill-dot {
-  width: 6px; height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.hero-pill span {
-  font-family: var(--syne);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-h1 {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: clamp(3rem, 12vw, 5.5rem);
-  line-height: 0.97;
-  letter-spacing: -0.03em;
-  margin-bottom: 28px;
-  animation: fadeUp 0.7s ease 0.2s both;
-}
-
-h1 em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-}
-
-.hero-sub {
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 400px;
-  margin-bottom: 40px;
-  font-weight: 300;
-  animation: fadeUp 0.7s ease 0.3s both;
-}
-
-.hero-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 320px;
-  animation: fadeUp 0.7s ease 0.4s both;
-}
-
-.btn-gold {
-  background: var(--accent);
-  color: #1a1408;
-  font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.88rem;
-  letter-spacing: 0.03em;
-  padding: 15px 28px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  transition: opacity 0.15s;
-}
-
-.btn-gold:hover { opacity: 0.9; }
-
-.btn-outline {
-  background: transparent;
-  color: var(--white);
-  font-family: var(--syne);
-  font-weight: 600;
-  font-size: 0.88rem;
-  letter-spacing: 0.03em;
-  padding: 14px 28px;
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-  text-align: center;
-  transition: border-color 0.2s;
-}
-
-.btn-outline:hover { border-color: rgba(255,255,255,0.15); }
-
-.hero-meta {
-  margin-top: 28px;
-  font-size: 0.72rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-  animation: fadeUp 0.7s ease 0.5s both;
-}
-
-/* STATS */
-.stats-bar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.stat-item {
-  padding: 28px 20px;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
-
-.stat-item:last-child { border-right: none; }
-
-.stat-val {
-  display: block;
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: 1.7rem;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.stat-lbl {
-  font-size: 0.65rem;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-family: var(--syne);
-}
-
-/* SECTIONS */
-.sec {
-  padding: 80px 28px;
-  position: relative;
-}
-
-.sec-alt { background: var(--surface); }
-
-.sec-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--syne);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-
-.sec-tag::before {
-  content: '';
-  display: block;
-  width: 18px; height: 1px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.sec-title {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: clamp(1.8rem, 6vw, 2.6rem);
-  letter-spacing: -0.025em;
-  line-height: 1.08;
-  margin-bottom: 44px;
-}
-
-.sec-title em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(237,237,245,0.35);
-}
-
-/* STEPS */
-.steps {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.step-row {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  padding: 26px 22px;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
-}
-
-.step-row:last-child { border-bottom: none; }
-.step-row:hover { background: #14142a; }
-
-.step-n {
-  font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  background: var(--accent-dim);
-  border: 1px solid var(--accent-border);
-  border-radius: 100px;
-  padding: 3px 10px;
-  flex-shrink: 0;
-  margin-top: 3px;
-}
-
-.step-row h3 {
-  font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 5px;
-  letter-spacing: -0.01em;
-}
-
-.step-row p {
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.6;
-  font-weight: 300;
-}
-
-/* FEATURES */
-.feat-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.feat-cell {
-  padding: 26px 20px;
-  background: var(--card);
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.2s;
-}
-
-.feat-cell:nth-child(2n) { border-right: none; }
-.feat-cell:nth-last-child(-n+2) { border-bottom: none; }
-.feat-cell:hover { background: #14142a; }
-
-.feat-icon {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  display: block;
-}
-
-.feat-cell h4 {
-  font-family: var(--syne);
-  font-weight: 700;
-  font-size: 0.85rem;
-  margin-bottom: 5px;
-  letter-spacing: -0.01em;
-}
-
-.feat-cell p {
-  font-size: 0.75rem;
-  color: var(--muted);
-  line-height: 1.5;
-  font-weight: 300;
-}
-
-/* PRICING */
-.price-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.price-card {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: var(--card);
-  padding: 32px 26px;
-  position: relative;
-  overflow: hidden;
-}
-
-.price-card.hot {
-  border-color: var(--accent-border);
-  background: linear-gradient(140deg, #12121f 0%, #161228 100%);
-}
-
-.price-card.hot::before {
-  content: '';
-  position: absolute;
-  top: -100px; right: -100px;
-  width: 250px; height: 250px;
-  background: radial-gradient(circle, rgba(100,80,180,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.hot-badge {
-  display: inline-block;
-  background: var(--accent);
-  color: #1a1408;
-  font-family: var(--syne);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 100px;
-  margin-bottom: 18px;
-}
-
-.plan-name {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: 1.2rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 6px;
-}
-
-.plan-amt {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: 3rem;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: var(--accent);
-}
-
-.plan-amt sup {
-  font-size: 1.3rem;
-  vertical-align: super;
-  letter-spacing: 0;
-}
-
-.plan-per {
-  font-family: var(--syne);
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 26px;
-  margin-top: 2px;
-}
-
-.plan-list {
-  list-style: none;
-  margin-bottom: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.plan-list li {
-  font-size: 0.82rem;
-  color: rgba(237,237,245,0.7);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.4;
-  font-weight: 300;
-}
-
-.plan-list li::before {
-  content: '✦';
-  color: var(--accent);
-  font-size: 0.55rem;
-  flex-shrink: 0;
-  margin-top: 4px;
-}
-
-.stripe-line {
-  margin-top: 14px;
-  font-size: 0.68rem;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* PROOF */
-.proof-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.proof-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 26px 22px;
-}
-
-.stars {
-  color: var(--accent);
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  margin-bottom: 12px;
-}
-
-.quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: rgba(237,237,245,0.8);
-  margin-bottom: 18px;
-}
-
-.author {
-  font-family: var(--syne);
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-/* FAQ */
-.faq-wrap {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-details {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-}
-
-details:last-child { border-bottom: none; }
-details[open] { background: #12122a; }
-
-summary {
-  font-family: var(--syne);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: -0.01em;
-  padding: 22px 22px;
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  user-select: none;
-  gap: 16px;
-}
-
-summary::-webkit-details-marker { display: none; }
-
-.faq-icon {
-  font-family: var(--syne);
-  font-size: 1.1rem;
-  color: var(--accent);
-  transition: transform 0.2s;
-  flex-shrink: 0;
-  font-weight: 300;
-}
-
-details[open] .faq-icon { transform: rotate(45deg); }
-
-details p {
-  font-size: 0.83rem;
-  color: var(--muted);
-  line-height: 1.7;
-  padding: 0 22px 22px;
-  font-weight: 300;
-}
-
-/* FINAL CTA */
-.cta-sec {
-  text-align: center;
-  padding: 100px 28px;
-  position: relative;
-  overflow: hidden;
-  border-top: 1px solid var(--border);
-}
-
-.cta-orb {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px; height: 300px;
-  background: radial-gradient(ellipse, rgba(100,80,180,0.15) 0%, transparent 65%);
-  pointer-events: none;
-  filter: blur(40px);
-}
-
-.cta-sec h2 {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: clamp(2rem, 8vw, 3.2rem);
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-  margin-bottom: 18px;
-  position: relative;
-}
-
-.cta-sec h2 em {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  color: var(--accent);
-}
-
-.cta-sec p {
-  font-size: 0.9rem;
-  color: var(--muted);
-  font-weight: 300;
-  max-width: 320px;
-  margin: 0 auto 36px;
-  line-height: 1.65;
-  position: relative;
-}
-
-.cta-btns {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 280px;
-  margin: 0 auto;
-  position: relative;
-}
-
-/* FOOTER */
-footer {
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  padding: 40px 28px;
-  text-align: center;
-}
-
-.foot-logo {
-  font-family: var(--syne);
-  font-weight: 800;
-  font-size: 1.1rem;
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
-}
-
-.foot-logo span { color: var(--accent); }
-
-.foot-tag {
-  font-family: var(--syne);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 22px;
-}
-
-.foot-links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.foot-links a {
-  font-size: 0.7rem;
-  color: var(--muted);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: color 0.2s;
-}
-
-.foot-links a:hover { color: var(--white); }
-
-.foot-copy {
-  font-size: 0.65rem;
-  color: rgba(237,237,245,0.15);
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06060f;--surface:#0c0c20;--card:#0f0f24;--card2:#131328;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);
+  --y:#FFE135;--y2:#FFF176;--y-dim:rgba(255,225,53,0.1);--y-border:rgba(255,225,53,0.25);
+  --white:#ffffff;--muted:rgba(240,240,250,0.45);--subtle:rgba(240,240,250,0.2);--faint:rgba(240,240,250,0.1);
+  --head:'Bricolage Grotesque',sans-serif;--serif:'Lora',serif;--body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.announce{background:linear-gradient(90deg,#110d30,#1a1248,#110d30);border-bottom:1px solid rgba(120,90,220,0.2);padding:11px 32px;display:flex;align-items:center;justify-content:center;gap:12px}
+.ann-dot{width:6px;height:6px;background:var(--y);border-radius:50%;box-shadow:0 0 8px var(--y);flex-shrink:0}
+.ann-text{font-family:var(--head);font-size:0.78rem;font-weight:500;color:rgba(240,240,250,0.8)}
+.ann-link{font-family:var(--head);font-size:0.78rem;font-weight:700;color:var(--y);text-decoration:none;border-bottom:1px solid rgba(255,225,53,0.3);padding-bottom:1px}
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 32px;background:rgba(6,6,15,0.85);backdrop-filter:blur(28px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.vmark{width:34px;height:34px;background:var(--y);border-radius:9px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(255,225,53,0.25);flex-shrink:0}
+.vmark svg{display:block;width:18px;height:18px}
+.logo-txt{font-family:var(--head);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;color:var(--white)}
+.logo-txt em{font-style:normal;color:var(--y)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.nav-login{font-family:var(--head);font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:100px;transition:color 0.2s,background 0.2s}
+.nav-login:hover{color:var(--white);background:var(--faint)}
+.nav-cta{background:var(--y);color:#0d0a00;font-family:var(--head);font-weight:700;font-size:0.82rem;letter-spacing:0.02em;padding:10px 22px;border:none;border-radius:100px;cursor:pointer;text-decoration:none;box-shadow:0 0 20px rgba(255,225,53,0.2);transition:background 0.15s,box-shadow 0.2s}
+.nav-cta:hover{background:var(--y2);box-shadow:0 0 28px rgba(255,225,53,0.35)}
+.ticker-wrap{overflow:hidden;background:rgba(255,255,255,0.015);border-bottom:1px solid var(--border);padding:10px 0}
+.ticker-track{display:flex;animation:ticker 32s linear infinite;white-space:nowrap}
+.t-item{font-family:var(--head);font-weight:600;font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--subtle);padding:0 22px;flex-shrink:0}
+.t-dot{color:var(--y);opacity:0.5}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:80px 32px 64px;overflow:hidden}
+.orb-a{position:absolute;top:-180px;right:-140px;width:620px;height:620px;background:radial-gradient(circle,rgba(120,90,220,0.22) 0%,transparent 65%);pointer-events:none;filter:blur(70px)}
+.orb-b{position:absolute;bottom:-100px;left:-100px;width:480px;height:480px;background:radial-gradient(circle,rgba(255,225,53,0.07) 0%,transparent 65%);pointer-events:none;filter:blur(60px)}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--y-border);border-radius:100px;padding:6px 14px;margin-bottom:32px;width:fit-content;animation:fadeUp 0.6s ease 0.1s both;background:var(--y-dim)}
+.pill-dot{width:5px;height:5px;background:var(--y);border-radius:50%;box-shadow:0 0 6px var(--y);flex-shrink:0}
+.hero-pill span{font-family:var(--head);font-size:0.62rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--y)}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(3rem,13vw,6rem);line-height:0.93;letter-spacing:-0.04em;margin-bottom:28px;animation:fadeUp 0.6s ease 0.2s both;color:#ffffff;text-shadow:0 2px 40px rgba(0,0,0,0.8),0 0 80px rgba(0,0,0,0.4)}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--y);text-shadow:0 0 30px rgba(255,225,53,0.4),0 2px 40px rgba(0,0,0,0.6)}
+.hero-sub{font-size:1.05rem;line-height:1.72;color:rgba(240,240,250,0.65);max-width:440px;margin-bottom:40px;font-weight:300;animation:fadeUp 0.6s ease 0.3s both}
+.hero-btns{display:flex;flex-direction:column;gap:12px;max-width:320px;animation:fadeUp 0.6s ease 0.4s both}
+.btn-y{background:var(--y);color:#0d0a00;font-family:var(--head);font-weight:700;font-size:0.9rem;letter-spacing:0.02em;padding:16px 32px;border:none;border-radius:100px;cursor:pointer;text-decoration:none;display:block;text-align:center;box-shadow:0 4px 24px rgba(255,225,53,0.22);transition:background 0.15s,box-shadow 0.2s}
+.btn-y:hover{background:var(--y2);box-shadow:0 4px 32px rgba(255,225,53,0.38)}
+.btn-o{background:rgba(255,255,255,0.04);color:var(--white);font-family:var(--head);font-weight:600;font-size:0.9rem;padding:15px 32px;border:1px solid var(--border2);border-radius:100px;cursor:pointer;text-decoration:none;display:block;text-align:center;transition:background 0.2s,border-color 0.2s}
+.btn-o:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.hero-trust{margin-top:28px;font-size:0.72rem;color:var(--subtle);letter-spacing:0.06em;animation:fadeUp 0.6s ease 0.5s both}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{padding:28px 20px;text-align:center;border-right:1px solid var(--border);position:relative}
+.stat::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:var(--y);opacity:0.35;border-radius:2px}
+.stat:last-child{border-right:none}
+.stat-val{display:block;font-family:var(--head);font-weight:800;font-size:1.8rem;letter-spacing:-0.04em;color:var(--y);margin-bottom:5px;text-shadow:0 0 20px rgba(255,225,53,0.3)}
+.stat-lbl{font-size:0.62rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;font-family:var(--head)}
+.sec{padding:88px 32px;position:relative}
+.sec-dark{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.sec-tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--head);font-size:0.6rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--y);margin-bottom:16px}
+.sec-tag::before{content:'';display:block;width:16px;height:1px;background:var(--y)}
+.sec-h{font-family:var(--head);font-weight:800;font-size:clamp(2rem,6.5vw,3rem);letter-spacing:-0.035em;line-height:1.03;margin-bottom:48px;color:#ffffff;text-shadow:0 2px 20px rgba(0,0,0,0.5)}
+.sec-h em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted);text-shadow:none}
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,225,53,0.1),transparent)}
+.steps{border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.step{display:flex;gap:18px;align-items:flex-start;padding:26px 24px;background:var(--card);border-bottom:1px solid var(--border);transition:background 0.2s}
+.step:last-child{border-bottom:none}
+.step:hover{background:var(--card2)}
+.sn{font-family:var(--head);font-weight:700;font-size:0.58rem;letter-spacing:0.1em;color:var(--y);background:var(--y-dim);border:1px solid var(--y-border);border-radius:6px;padding:3px 9px;flex-shrink:0;margin-top:3px}
+.step h3{font-family:var(--head);font-weight:700;font-size:0.96rem;margin-bottom:5px;color:#ffffff}
+.step p{font-size:0.82rem;color:var(--muted);line-height:1.65;font-weight:300}
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.feat{padding:28px 22px;background:var(--card);border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background 0.2s}
+.feat:nth-child(2n){border-right:none}
+.feat:nth-last-child(-n+2){border-bottom:none}
+.feat:hover{background:var(--card2)}
+.feat-icon{font-size:1.3rem;margin-bottom:12px;display:block}
+.feat h4{font-family:var(--head);font-weight:700;font-size:0.86rem;margin-bottom:5px;color:#ffffff}
+.feat p{font-size:0.76rem;color:var(--muted);line-height:1.55;font-weight:300}
+.price-grid{display:flex;flex-direction:column;gap:14px}
+.pc{border:1px solid var(--border);border-radius:20px;background:var(--card);padding:34px 28px;position:relative;overflow:hidden}
+.pc.hot{border-color:var(--y-border);background:linear-gradient(150deg,#0e0e28,#14103c)}
+.pc.hot::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,225,53,0.4),transparent)}
+.hot-badge{display:inline-block;background:var(--y);color:#0d0a00;font-family:var(--head);font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:18px}
+.pname{font-family:var(--head);font-weight:800;font-size:1.25rem;letter-spacing:-0.025em;margin-bottom:8px;color:#ffffff}
+.pprice{font-family:var(--head);font-weight:800;font-size:3.2rem;letter-spacing:-0.05em;line-height:1;color:var(--y);text-shadow:0 0 24px rgba(255,225,53,0.2)}
+.pprice sup{font-size:1.3rem;vertical-align:super}
+.pper{font-family:var(--head);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:26px;margin-top:3px}
+.plist{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:11px}
+.plist li{font-size:0.83rem;color:rgba(240,240,250,0.72);display:flex;align-items:flex-start;gap:10px;line-height:1.45;font-weight:300}
+.plist li::before{content:'✦';color:var(--y);font-size:0.5rem;flex-shrink:0;margin-top:4px}
+.snote{margin-top:14px;font-size:0.67rem;color:var(--subtle);display:flex;align-items:center;gap:6px}
+.proof-grid{display:flex;flex-direction:column;gap:14px}
+.qcard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 24px;position:relative;overflow:hidden;transition:background 0.2s}
+.qcard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,225,53,0.15),transparent)}
+.qcard:hover{background:var(--card2)}
+.stars{color:var(--y);font-size:0.65rem;letter-spacing:3px;margin-bottom:14px;text-shadow:0 0 8px rgba(255,225,53,0.4)}
+.qt{font-family:var(--serif);font-style:italic;font-size:1.03rem;line-height:1.68;color:rgba(240,240,250,0.85);margin-bottom:18px}
+.qa{font-family:var(--head);font-size:0.62rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--y)}
+.faq{border:1px solid var(--border);border-radius:20px;overflow:hidden}
+details{background:var(--card);border-bottom:1px solid var(--border);transition:background 0.2s}
+details:last-child{border-bottom:none}
+details[open]{background:var(--card2)}
+summary{font-family:var(--head);font-weight:600;font-size:0.9rem;padding:22px 24px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none;color:#ffffff}
+summary::-webkit-details-marker{display:none}
+.fp{font-size:1.1rem;color:var(--y);transition:transform 0.25s;flex-shrink:0;font-weight:300}
+details[open] .fp{transform:rotate(45deg)}
+details p{font-size:0.83rem;color:var(--muted);line-height:1.72;padding:0 24px 22px;font-weight:300}
+.cta-sec{text-align:center;padding:110px 32px;position:relative;overflow:hidden;border-top:1px solid var(--border)}
+.cta-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(110,85,210,0.18) 0%,transparent 65%);pointer-events:none;filter:blur(50px)}
+.cta-v{width:52px;height:52px;background:var(--y);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;box-shadow:0 0 28px rgba(255,225,53,0.3)}
+.cta-v svg{display:block;width:26px;height:26px}
+.cta-sec h2{font-family:var(--head);font-weight:800;font-size:clamp(2.2rem,8vw,3.8rem);letter-spacing:-0.04em;line-height:1.0;margin-bottom:18px;position:relative;color:#ffffff;text-shadow:0 2px 30px rgba(0,0,0,0.6)}
+.cta-sec h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--y);text-shadow:0 0 30px rgba(255,225,53,0.35)}
+.cta-sec p{font-size:0.95rem;color:var(--muted);font-weight:300;max-width:360px;margin:0 auto 40px;line-height:1.7;position:relative}
+.cta-btns{display:flex;flex-direction:column;gap:12px;max-width:290px;margin:0 auto;position:relative}
+footer{background:var(--bg);border-top:1px solid var(--border);padding:44px 32px;text-align:center}
+.foot-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px}
+.fv{width:28px;height:28px;background:var(--y);border-radius:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px rgba(255,225,53,0.2)}
+.fv svg{display:block;width:14px;height:14px}
+.flogo{font-family:var(--head);font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;color:#ffffff}
+.flogo em{font-style:normal;color:var(--y)}
+.ftag{font-family:var(--head);font-size:0.58rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--subtle);margin-bottom:24px}
+.flinks{display:flex;justify-content:center;gap:24px;margin-bottom:22px;flex-wrap:wrap}
+.flinks a{font-size:0.7rem;color:var(--muted);text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
+.flinks a:hover{color:#ffffff}
+.fcopy{font-size:0.65rem;color:rgba(240,240,250,0.15)}
+.fmonkee{font-size:0.6rem;color:rgba(240,240,250,0.1);margin-top:4px;letter-spacing:0.06em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
-
+<div class="announce">
+  <div class="ann-dot"></div>
+  <span class="ann-text">Vendorfy Pro now includes AI photo background removal —</span>
+  <a href="#pricing" class="ann-link">See plans →</a>
+</div>
 <nav>
-  <div class="nav-logo">Vendor<span>fy</span></div>
-  <a href="#pricing" class="nav-cta">Start Selling</a>
+  <a href="#" class="nav-logo">
+    <div class="vmark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5L12 20L20 5H16L12 14L8 5H4Z" fill="#0d0a00"/></svg></div>
+    <span class="logo-txt">Vendor<em>fy</em></span>
+  </a>
+  <div class="nav-r">
+    <a href="#" class="nav-login">Login</a>
+    <a href="#pricing" class="nav-cta">Start Selling</a>
+  </div>
 </nav>
-
 <div class="ticker-wrap">
   <div class="ticker-track">
-    <span class="ticker-item">Swap Meet Vendors <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Flea Markets <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Resellers <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Pop-Up Shops <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Estate Sales <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Local Merchants <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Thrift Flippers <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Swap Meet Vendors <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Flea Markets <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Resellers <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Pop-Up Shops <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Estate Sales <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Local Merchants <span class="ticker-dot">✦</span></span>
-    <span class="ticker-item">Thrift Flippers <span class="ticker-dot">✦</span></span>
+    <span class="t-item">Swap Meet Vendors <span class="t-dot">✦</span></span>
+    <span class="t-item">Flea Markets <span class="t-dot">✦</span></span>
+    <span class="t-item">Resellers <span class="t-dot">✦</span></span>
+    <span class="t-item">Pop-Up Shops <span class="t-dot">✦</span></span>
+    <span class="t-item">Estate Sales <span class="t-dot">✦</span></span>
+    <span class="t-item">Local Merchants <span class="t-dot">✦</span></span>
+    <span class="t-item">Thrift Flippers <span class="t-dot">✦</span></span>
+    <span class="t-item">Swap Meet Vendors <span class="t-dot">✦</span></span>
+    <span class="t-item">Flea Markets <span class="t-dot">✦</span></span>
+    <span class="t-item">Resellers <span class="t-dot">✦</span></span>
+    <span class="t-item">Pop-Up Shops <span class="t-dot">✦</span></span>
+    <span class="t-item">Estate Sales <span class="t-dot">✦</span></span>
+    <span class="t-item">Local Merchants <span class="t-dot">✦</span></span>
+    <span class="t-item">Thrift Flippers <span class="t-dot">✦</span></span>
   </div>
 </div>
-
 <section class="hero">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-
-  <div class="hero-pill">
-    <div class="hero-pill-dot"></div>
-    <span>AI-Powered Selling System</span>
-  </div>
-
+  <div class="orb-a"></div>
+  <div class="orb-b"></div>
+  <div class="hero-pill"><div class="pill-dot"></div><span>AI-Powered Product-to-Sale System</span></div>
   <h1>Scan It.<br>Tag It.<br><em>Sell It.</em></h1>
-
   <p class="hero-sub">Stop writing listings by hand. Vendorfy turns any product into a scannable smart store in seconds — from your phone, at your booth.</p>
-
   <div class="hero-btns">
-    <a href="#pricing" class="btn-gold">Get Started — $49/mo</a>
-    <a href="#how-it-works" class="btn-outline">See How It Works</a>
+    <a href="#pricing" class="btn-y">Get Started — $49/mo</a>
+    <a href="#how-it-works" class="btn-o">See How It Works</a>
   </div>
-
-  <p class="hero-meta">No contracts &nbsp;·&nbsp; Cancel anytime &nbsp;·&nbsp; Mobile-first</p>
+  <p class="hero-trust">No contracts · Cancel anytime · Mobile-first</p>
 </section>
-
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-val">5s</span>
-    <span class="stat-lbl">To list a product</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-val">QR</span>
-    <span class="stat-lbl">Every item</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-val">100%</span>
-    <span class="stat-lbl">Mobile-first</span>
-  </div>
+<div class="stats">
+  <div class="stat"><span class="stat-val">5s</span><span class="stat-lbl">To list a product</span></div>
+  <div class="stat"><span class="stat-val">QR</span><span class="stat-lbl">Every item</span></div>
+  <div class="stat"><span class="stat-val">100%</span><span class="stat-lbl">Mobile-first</span></div>
 </div>
-
 <section class="sec" id="how-it-works">
   <div class="sec-tag">The Process</div>
-  <h2 class="sec-title">From scan to sale<br><em>in minutes</em></h2>
+  <h2 class="sec-h">From scan to sale<br><em>in minutes</em></h2>
   <div class="steps">
-    <div class="step-row">
-      <span class="step-n">01</span>
-      <div><h3>Scan the Barcode</h3><p>Point your phone at any UPC. Vendorfy pulls product data instantly — or snap a photo and let AI fill it in.</p></div>
-    </div>
-    <div class="step-row">
-      <span class="step-n">02</span>
-      <div><h3>AI Builds Your Listing</h3><p>Title, description, category, and pricing — generated automatically. Review and approve in seconds.</p></div>
-    </div>
-    <div class="step-row">
-      <span class="step-n">03</span>
-      <div><h3>QR Code Generated</h3><p>Every product gets a scannable QR. Print it, stick it on the item, or display it at your table.</p></div>
-    </div>
-    <div class="step-row">
-      <span class="step-n">04</span>
-      <div><h3>Buyer Scans & Buys</h3><p>Customers scan, see your product page, and contact you or buy directly. Leads captured automatically.</p></div>
-    </div>
-    <div class="step-row">
-      <span class="step-n">05</span>
-      <div><h3>Inventory Updates Live</h3><p>Your dashboard tracks everything. Know what's sold, what's live, what needs attention — from anywhere.</p></div>
-    </div>
+    <div class="step"><span class="sn">01</span><div><h3>Scan the Barcode</h3><p>Point your phone at any UPC. Vendorfy pulls product data instantly — or snap a photo and let AI fill it in.</p></div></div>
+    <div class="step"><span class="sn">02</span><div><h3>AI Builds Your Listing</h3><p>Title, description, category, and pricing — generated automatically. Review and approve in seconds.</p></div></div>
+    <div class="step"><span class="sn">03</span><div><h3>QR Code Generated</h3><p>Every product gets a scannable QR. Print it, stick it on the item, or display it at your table.</p></div></div>
+    <div class="step"><span class="sn">04</span><div><h3>Buyer Scans & Buys</h3><p>Customers scan, see your product page, and contact you or buy directly. Leads captured automatically.</p></div></div>
+    <div class="step"><span class="sn">05</span><div><h3>Inventory Updates Live</h3><p>Your dashboard tracks everything. Know what's sold, what's live, what needs attention — from anywhere.</p></div></div>
   </div>
 </section>
-
-<section class="sec sec-alt">
+<div class="divider"></div>
+<section class="sec sec-dark">
   <div class="sec-tag">What You Get</div>
-  <h2 class="sec-title">Built for<br><em>the booth</em></h2>
+  <h2 class="sec-h">Built for<br><em>the booth</em></h2>
   <div class="feat-grid">
-    <div class="feat-cell"><span class="feat-icon">📷</span><h4>Barcode Scan</h4><p>Instant UPC lookup from your phone camera.</p></div>
-    <div class="feat-cell"><span class="feat-icon">🤖</span><h4>AI Listings</h4><p>Auto-generated titles, descriptions & pricing.</p></div>
-    <div class="feat-cell"><span class="feat-icon">📲</span><h4>QR Codes</h4><p>One per product. Scannable by any phone.</p></div>
-    <div class="feat-cell"><span class="feat-icon">🛒</span><h4>Public Pages</h4><p>Each product gets its own shareable page.</p></div>
-    <div class="feat-cell"><span class="feat-icon">📬</span><h4>Lead Capture</h4><p>Buyer info logged every time they reach out.</p></div>
-    <div class="feat-cell"><span class="feat-icon">📦</span><h4>Inventory Dash</h4><p>Track all products from one screen.</p></div>
-    <div class="feat-cell"><span class="feat-icon">📤</span><h4>CSV Export</h4><p>Download your full inventory anytime.</p></div>
-    <div class="feat-cell"><span class="feat-icon">📱</span><h4>Mobile-First</h4><p>Works perfectly from any phone. No app needed.</p></div>
+    <div class="feat"><span class="feat-icon">📷</span><h4>Barcode Scan</h4><p>Instant UPC lookup from your phone camera.</p></div>
+    <div class="feat"><span class="feat-icon">🤖</span><h4>AI Listings</h4><p>Auto-generated titles, descriptions & pricing.</p></div>
+    <div class="feat"><span class="feat-icon">📲</span><h4>QR Codes</h4><p>One per product. Scannable by any phone.</p></div>
+    <div class="feat"><span class="feat-icon">🛒</span><h4>Public Pages</h4><p>Each product gets its own shareable page.</p></div>
+    <div class="feat"><span class="feat-icon">📬</span><h4>Lead Capture</h4><p>Buyer info logged every time they reach out.</p></div>
+    <div class="feat"><span class="feat-icon">📦</span><h4>Inventory Dash</h4><p>Track all products from one screen.</p></div>
+    <div class="feat"><span class="feat-icon">📤</span><h4>CSV Export</h4><p>Download your full inventory anytime.</p></div>
+    <div class="feat"><span class="feat-icon">📱</span><h4>Mobile-First</h4><p>Works perfectly from any phone. No app needed.</p></div>
   </div>
 </section>
-
+<div class="divider"></div>
 <section class="sec" id="pricing">
   <div class="sec-tag">Simple Pricing</div>
-  <h2 class="sec-title">Pick your<br><em>plan</em></h2>
-  <div class="price-cards">
-    <div class="price-card">
-      <div class="plan-name">Starter</div>
-      <div class="plan-amt"><sup>$</sup>49</div>
-      <div class="plan-per">per month</div>
-      <ul class="plan-list">
+  <h2 class="sec-h">Pick your<br><em>plan</em></h2>
+  <div class="price-grid">
+    <div class="pc">
+      <div class="pname">Starter</div>
+      <div class="pprice"><sup>$</sup>49</div>
+      <div class="pper">per month</div>
+      <ul class="plist">
         <li>Up to 100 active products</li>
         <li>Barcode scan + AI listing builder</li>
         <li>QR code generation</li>
@@ -862,15 +225,15 @@ footer {
         <li>Lead capture + basic dashboard</li>
         <li>CSV export · Mobile-optimized</li>
       </ul>
-      <a href="#" class="btn-outline">Get Starter</a>
-      <div class="stripe-line">🔒 Secure checkout via Stripe · Cancel anytime</div>
+      <a href="#" class="btn-o">Get Starter</a>
+      <div class="snote">🔒 Secure checkout via Stripe · Cancel anytime</div>
     </div>
-    <div class="price-card hot">
+    <div class="pc hot">
       <div class="hot-badge">Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-amt"><sup>$</sup>99</div>
-      <div class="plan-per">per month</div>
-      <ul class="plan-list">
+      <div class="pname">Pro</div>
+      <div class="pprice"><sup>$</sup>99</div>
+      <div class="pper">per month</div>
+      <ul class="plist">
         <li>Unlimited products</li>
         <li>Everything in Starter</li>
         <li>AI photo background removal</li>
@@ -880,82 +243,57 @@ footer {
         <li>Early access to new features</li>
         <li>Priority support</li>
       </ul>
-      <a href="#" class="btn-gold">Get Pro</a>
-      <div class="stripe-line">🔒 Secure checkout via Stripe · Cancel anytime</div>
+      <a href="#" class="btn-y">Get Pro</a>
+      <div class="snote">🔒 Secure checkout via Stripe · Cancel anytime</div>
     </div>
   </div>
 </section>
-
-<section class="sec sec-alt">
+<div class="divider"></div>
+<section class="sec sec-dark">
   <div class="sec-tag">Real Vendors</div>
-  <h2 class="sec-title">They said it.<br><em>Not us.</em></h2>
-  <div class="proof-cards">
-    <div class="proof-card">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"I used to spend 2 hours every Sunday writing listings. Now I do it in 15 minutes at the booth. The QR code thing alone is worth it."</p>
-      <div class="author">— Maria T., Phoenix Park & Swap</div>
-    </div>
-    <div class="proof-card">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"My customers pull out their phone, scan, and I get a lead notification before they even walk away. This is how you sell."</p>
-      <div class="author">— D. Reyes, Glendale Flea Market</div>
-    </div>
-    <div class="proof-card">
-      <div class="stars">★★★★★</div>
-      <p class="quote">"Set up 40 products in one afternoon. The AI descriptions are better than what I was writing myself. I'm not going back."</p>
-      <div class="author">— J. Brooks, Mesa Reseller</div>
-    </div>
+  <h2 class="sec-h">They said it.<br><em>Not us.</em></h2>
+  <div class="proof-grid">
+    <div class="qcard"><div class="stars">★★★★★</div><p class="qt">"I used to spend 2 hours every Sunday writing listings. Now I do it in 15 minutes at the booth. The QR code alone is worth it."</p><div class="qa">— Maria T., Phoenix Park & Swap</div></div>
+    <div class="qcard"><div class="stars">★★★★★</div><p class="qt">"My customers pull out their phone, scan, and I get a lead notification before they even walk away. This is how you sell."</p><div class="qa">— D. Reyes, Glendale Flea Market</div></div>
+    <div class="qcard"><div class="stars">★★★★★</div><p class="qt">"Set up 40 products in one afternoon. The AI descriptions are better than what I was writing myself. I'm not going back."</p><div class="qa">— J. Brooks, Mesa Reseller</div></div>
   </div>
 </section>
-
+<div class="divider"></div>
 <section class="sec">
   <div class="sec-tag">Questions</div>
-  <h2 class="sec-title">Got<br><em>answers</em></h2>
-  <div class="faq-wrap">
-    <details open>
-      <summary>Do I need to install an app? <span class="faq-icon">+</span></summary>
-      <p>No. Vendorfy is fully web-based. Works on any phone browser — iPhone or Android — no download required.</p>
-    </details>
-    <details>
-      <summary>What if my product doesn't have a barcode? <span class="faq-icon">+</span></summary>
-      <p>No problem. Take a photo or enter product info manually. The AI still generates your full listing from there.</p>
-    </details>
-    <details>
-      <summary>How do the QR codes work? <span class="faq-icon">+</span></summary>
-      <p>Each product gets a unique QR code you can print or display. When a customer scans it they see a live product page with listing, photos, and a way to contact or buy from you.</p>
-    </details>
-    <details>
-      <summary>Can I cancel anytime? <span class="faq-icon">+</span></summary>
-      <p>Yes. No contracts, no cancellation fees. Cancel directly from your account in under 60 seconds.</p>
-    </details>
-    <details>
-      <summary>What's the difference between Starter and Pro? <span class="faq-icon">+</span></summary>
-      <p>Starter is perfect for vendors with up to 100 products. Pro removes all limits, adds AI photo enhancement, and gives you advanced inventory and lead management.</p>
-    </details>
+  <h2 class="sec-h">Got<br><em>answers</em></h2>
+  <div class="faq">
+    <details open><summary>Do I need to install an app? <span class="fp">+</span></summary><p>No. Vendorfy is fully web-based. Works on any phone browser — iPhone or Android — no download required.</p></details>
+    <details><summary>What if my product doesn't have a barcode? <span class="fp">+</span></summary><p>No problem. Take a photo or enter product info manually. The AI still generates your full listing from there.</p></details>
+    <details><summary>How do the QR codes work? <span class="fp">+</span></summary><p>Each product gets a unique QR to print or display. Customers scan it and see a live product page with your listing, photos, and a way to buy.</p></details>
+    <details><summary>Can I cancel anytime? <span class="fp">+</span></summary><p>Yes. No contracts, no cancellation fees. Cancel from your account in under 60 seconds.</p></details>
+    <details><summary>Starter vs Pro — what's the difference? <span class="fp">+</span></summary><p>Starter covers up to 100 products. Pro removes all limits, adds AI photo enhancement, and unlocks advanced inventory and lead management tools.</p></details>
   </div>
 </section>
-
 <section class="cta-sec">
   <div class="cta-orb"></div>
+  <div class="cta-v"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5L12 20L20 5H16L12 14L8 5H4Z" fill="#0d0a00"/></svg></div>
   <h2>Stop writing.<br><em>Start selling.</em></h2>
   <p>Join vendors already using Vendorfy to list faster, capture more leads, and run a smarter booth.</p>
   <div class="cta-btns">
-    <a href="#pricing" class="btn-gold">Get Started Today</a>
-    <a href="#how-it-works" class="btn-outline">Learn More</a>
+    <a href="#pricing" class="btn-y">Get Started Today</a>
+    <a href="#how-it-works" class="btn-o">Learn More</a>
   </div>
 </section>
-
 <footer>
-  <div class="foot-logo">Vendor<span>fy</span></div>
-  <div class="foot-tag">Scan It · Tag It · Sell It</div>
-  <div class="foot-links">
+  <div class="foot-brand">
+    <div class="fv"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5L12 20L20 5H16L12 14L8 5H4Z" fill="#0d0a00"/></svg></div>
+    <div class="flogo">Vendor<em>fy</em></div>
+  </div>
+  <div class="ftag">Scan It · Tag It · Sell It</div>
+  <div class="flinks">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
     <a href="#">Support</a>
     <a href="mailto:hello@vendorfyai.com">Contact</a>
   </div>
-  <div class="foot-copy">© 2025 Vendorfy AI — A Monkee Bizznus Company · vendorfyai.com</div>
+  <div class="fcopy">© 2025 Vendorfy AI · vendorfyai.com</div>
+  <div class="fmonkee">A Monkee Bizznus Company</div>
 </footer>
-
 </body>
 </html>
