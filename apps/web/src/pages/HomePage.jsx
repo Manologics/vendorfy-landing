@@ -32,6 +32,7 @@ const HomePage = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', vendorName: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(false);
 
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -319,9 +320,25 @@ const HomePage = () => {
             <div className="absolute top-1/2 left-0 w-full h-[40px] light-streak-horizontal pointer-events-none z-0"></div>
 
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-              <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <motion.div className="text-center mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-2xl">Start Selling Smarter Today</h2>
                 <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed drop-shadow-md">Set up your products, generate QR codes, and start capturing customers in minutes.</p>
+              </motion.div>
+
+              {/* Billing toggle */}
+              <motion.div className="flex items-center justify-center gap-4 mb-12" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
+                <span className={`text-base font-semibold transition-colors ${!isAnnual ? 'text-white' : 'text-white/40'}`}>Monthly</span>
+                <button
+                  onClick={() => setIsAnnual(!isAnnual)}
+                  className={`relative w-14 h-7 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${isAnnual ? 'bg-primary' : 'bg-white/20'}`}
+                  aria-label="Toggle annual billing"
+                >
+                  <span className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full shadow transition-transform duration-300 ${isAnnual ? 'translate-x-7' : 'translate-x-0'}`} />
+                </button>
+                <span className={`text-base font-semibold transition-colors flex items-center gap-2 ${isAnnual ? 'text-white' : 'text-white/40'}`}>
+                  Annual
+                  <span className="bg-primary text-primary-foreground text-xs font-extrabold px-2 py-0.5 rounded-full tracking-wide">25% OFF</span>
+                </span>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -332,12 +349,13 @@ const HomePage = () => {
                     <div className="mb-8">
                       <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-5xl font-extrabold text-white">$49</span>
-                        <span className="text-white/60 text-lg font-medium">/month</span>
+                        <span className="text-5xl font-extrabold text-white">{isAnnual ? '$449' : '$49'}</span>
+                        <span className="text-white/60 text-lg font-medium">{isAnnual ? '/yr' : '/mo'}</span>
                       </div>
+                      {isAnnual && <p className="text-primary text-sm font-bold mt-1">Save $150 — 25% off</p>}
                     </div>
                     <ul className="space-y-3 mb-10 flex-1">
-                      {['Up to 100 active products', 'Barcode scan + AI listing builder', 'QR code generation', 'Public product pages', 'Lead capture + basic dashboard', 'CSV export · Mobile-optimized'].map((item, i) => (
+                      {['1 User Per Account', 'Up to 100 active products', 'Barcode scan + AI listing builder', 'QR code generation', 'Public product pages', 'Lead capture + basic dashboard', 'CSV export · Mobile-optimized'].map((item, i) => (
                         <li key={i} className="flex items-center gap-3 text-white/80">
                           <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
                           <span>{item}</span>
@@ -345,7 +363,7 @@ const HomePage = () => {
                       ))}
                     </ul>
                     <Button asChild size="lg" variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 text-lg py-6 rounded-2xl font-semibold">
-                      <a href="https://buy.stripe.com/4gMfZjcwjeoSeYifXxgQE01" target="_blank" rel="noopener noreferrer">Get Starter</a>
+                      <a href={isAnnual ? 'https://buy.stripe.com/fZu8wR3ZN5Sm7vQ7r1gQE03' : 'https://buy.stripe.com/4gMfZjcwjeoSeYifXxgQE01'} target="_blank" rel="noopener noreferrer">Get Starter</a>
                     </Button>
                     <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
                   </div>
@@ -359,12 +377,13 @@ const HomePage = () => {
                     <div className="mb-8">
                       <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
                       <div className="flex items-baseline gap-1">
-                        <span className="text-5xl font-extrabold text-white">$99</span>
-                        <span className="text-white/60 text-lg font-medium">/month</span>
+                        <span className="text-5xl font-extrabold text-white">{isAnnual ? '$899' : '$99'}</span>
+                        <span className="text-white/60 text-lg font-medium">{isAnnual ? '/yr' : '/mo'}</span>
                       </div>
+                      {isAnnual && <p className="text-primary text-sm font-bold mt-1">Save $300 — 25% off</p>}
                     </div>
                     <ul className="space-y-3 mb-10 flex-1">
-                      {['Unlimited products', 'Everything in Starter', 'AI photo background removal', 'Priority AI processing', 'Advanced inventory tracking', 'Full lead history + export', 'Early access to new features', 'Priority support'].map((item, i) => (
+                      {['1 User Per Account', 'Unlimited products', 'Everything in Starter', 'AI photo background removal', 'Priority AI processing', 'Advanced inventory tracking', 'Full lead history + export', 'Early access to new features', 'Priority support'].map((item, i) => (
                         <li key={i} className="flex items-center gap-3 text-white/80">
                           <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
                           <span>{item}</span>
@@ -372,7 +391,7 @@ const HomePage = () => {
                       ))}
                     </ul>
                     <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.25)] hover:shadow-[0_0_35px_rgba(250,204,21,0.4)] transition-all duration-300">
-                      <a href="https://buy.stripe.com/3cI4gBfIv1C65nI5iTgQE02" target="_blank" rel="noopener noreferrer">Get Pro</a>
+                      <a href={isAnnual ? 'https://buy.stripe.com/8x24gB53RdkO5nIcLlgQE04' : 'https://buy.stripe.com/3cI4gBfIv1C65nI5iTgQE02'} target="_blank" rel="noopener noreferrer">Get Pro</a>
                     </Button>
                     <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
                   </div>
