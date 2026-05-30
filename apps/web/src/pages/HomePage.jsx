@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Camera, Sparkles, QrCode, Scan, Users, Package, BarChart, Store, ShoppingBag, ShoppingCart, ArrowRight, TrendingUp, Send, RotateCcw, Smartphone, FileDown, CheckCircle2, Shield } from 'lucide-react';
+import { Camera, Sparkles, QrCode, Users, Package, BarChart, Store, ShoppingBag, ShoppingCart, TrendingUp, Send, RotateCcw, Smartphone, FileDown, CheckCircle2, Shield, Gift, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -30,156 +30,54 @@ const AnimatedBackground = () => (
 
 const HomePage = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    vendorName: ''
-  });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', vendorName: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    toast({
-      title: "Redirecting to secure checkout...",
-      description: "Opening Stripe in a new tab.",
-    });
-    
-    setTimeout(() => {
-      window.open(STRIPE_CHECKOUT_URL, '_blank');
-      setIsSubmitting(false);
-    }, 1500);
+    toast({ title: 'Redirecting to secure checkout...', description: 'Opening Stripe in a new tab.' });
+    setTimeout(() => { window.open(STRIPE_CHECKOUT_URL, '_blank'); setIsSubmitting(false); }, 1500);
   };
 
   const scrollToHowItWorks = () => {
-    const targetElement = document.getElementById('how-it-works');
-    if (targetElement) {
-      window.scrollTo({
-        behavior: 'smooth',
-        top: targetElement.offsetTop
-      });
-    }
+    const el = document.getElementById('how-it-works');
+    if (el) window.scrollTo({ behavior: 'smooth', top: el.offsetTop });
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const handleReferralClick = () => {
-    toast({
-      description: "Referral rewards section coming soon.",
-    });
-  };
-
-  const handlePlaceholderLink = (type) => {
-    toast({
-      description: `${type} coming soon.`,
-    });
-  };
+  const handlePlaceholderLink = (type) => toast({ description: `${type} coming soon.` });
 
   const steps = [
-    {
-      icon: Camera,
-      title: 'List Products in Seconds',
-      description: 'Snap a photo or scan your item and instantly create a ready-to-sell product listing with AI.'
-    },
-    {
-      icon: QrCode,
-      title: 'Turn Every Item Into a Smart Store',
-      description: 'Generate a QR code so customers can scan, view, and buy your product instantly from their phone.'
-    },
-    {
-      icon: Users,
-      title: 'Turn Walk-By Traffic Into Repeat Buyers',
-      description: 'Capture customer info and follow up with deals, price drops, and new inventory to bring buyers back.'
-    }
+    { icon: Camera, title: 'List Products in Seconds', description: 'Snap a photo or scan your item and instantly create a ready-to-sell product listing with AI.' },
+    { icon: QrCode, title: 'Turn Every Item Into a Smart Store', description: 'Generate a QR code so customers can scan, view, and buy your product instantly from their phone.' },
+    { icon: Users, title: 'Turn Walk-By Traffic Into Repeat Buyers', description: 'Capture customer info and follow up with deals, price drops, and new inventory to bring buyers back.' },
   ];
 
   const benefits = [
-    {
-      icon: TrendingUp,
-      title: 'Sell More Without Doing More',
-      description: 'Turn walk-by traffic into real sales without extra effort.'
-    },
-    {
-      icon: Send,
-      title: 'Follow Up Automatically',
-      description: 'Stay connected with interested buyers and bring them back to complete the sale.'
-    },
-    {
-      icon: RotateCcw,
-      title: 'Turn Your Booth Into a Digital Store',
-      description: 'Give every product a scannable experience that customers can shop instantly.'
-    },
-    {
-      icon: Smartphone,
-      title: 'Save Hours Every Week',
-      description: 'Create listings, tags, and product pages in seconds instead of manually.'
-    }
+    { icon: TrendingUp, title: 'Sell More Without Doing More', description: 'Turn walk-by traffic into real sales without extra effort.' },
+    { icon: Send, title: 'Follow Up Automatically', description: 'Stay connected with interested buyers and bring them back to complete the sale.' },
+    { icon: RotateCcw, title: 'Turn Your Booth Into a Digital Store', description: 'Give every product a scannable experience that customers can shop instantly.' },
+    { icon: Smartphone, title: 'Save Hours Every Week', description: 'Create listings, tags, and product pages in seconds instead of manually.' },
   ];
 
   const features = [
-    {
-      icon: Sparkles,
-      title: 'AI Product Listing Generator',
-      description: 'Transform photos into compelling product listings with AI-powered descriptions, pricing suggestions, and category tagging.'
-    },
-    {
-      icon: QrCode,
-      title: 'QR Code Product Tags',
-      description: 'Generate unique QR codes for every item. Customers scan to see details, photos, and purchase options instantly.'
-    },
-    {
-      icon: Package,
-      title: 'Inventory Scan In/Out',
-      description: 'Track what you bring to each event and what sells. Know your best performers and manage stock effortlessly.'
-    },
-    {
-      icon: Users,
-      title: 'Customer Lead Capture',
-      description: 'Build your customer database automatically. Collect emails and phone numbers when shoppers scan your products.'
-    },
-    {
-      icon: BarChart,
-      title: 'Vendor Analytics Dashboard',
-      description: 'See sales trends, popular items, customer demographics, and revenue insights all in one beautiful dashboard.'
-    },
-    {
-      icon: FileDown,
-      title: 'Export Listings to Your Store',
-      description: 'Download your listings as a CSV file and upload them directly to your online store in minutes.'
-    }
+    { icon: Sparkles, title: 'AI Product Listing Generator', description: 'Transform photos into compelling product listings with AI-powered descriptions, pricing suggestions, and category tagging.' },
+    { icon: QrCode, title: 'QR Code Product Tags', description: 'Generate unique QR codes for every item. Customers scan to see details, photos, and purchase options instantly.' },
+    { icon: Package, title: 'Inventory Scan In/Out', description: 'Track what you bring to each event and what sells. Know your best performers and manage stock effortlessly.' },
+    { icon: Users, title: 'Customer Lead Capture', description: 'Build your customer database automatically. Collect emails and phone numbers when shoppers scan your products.' },
+    { icon: BarChart, title: 'Vendor Analytics Dashboard', description: 'See sales trends, popular items, customer demographics, and revenue insights all in one beautiful dashboard.' },
+    { icon: FileDown, title: 'Export Listings to Your Store', description: 'Download your listings as a CSV file and upload them directly to your online store in minutes.' },
   ];
 
   const useCases = [
-    {
-      icon: Store,
-      title: 'Swap Meets'
-    },
-    {
-      icon: ShoppingBag,
-      title: 'Flea Markets'
-    },
-    {
-      icon: Store,
-      title: 'Pop-Up Shops'
-    },
-    {
-      icon: ShoppingCart,
-      title: 'Small Retail Vendors'
-    }
+    { icon: Store, title: 'Swap Meets' },
+    { icon: ShoppingBag, title: 'Flea Markets' },
+    { icon: Store, title: 'Pop-Up Shops' },
+    { icon: ShoppingCart, title: 'Small Retail Vendors' },
   ];
 
   return (
@@ -191,67 +89,68 @@ const HomePage = () => {
 
       <div className="min-h-screen bg-background text-foreground flex flex-col">
         <Header />
-        
+
         <main className="flex-1 flex flex-col">
+
           {/* Hero Section */}
           <section className="hero-container z-0 pt-[100px] py-32 md:py-48 min-h-screen md:min-h-[900px]">
             <div className="relative z-10 hero-content-wrapper">
-              <motion.p 
+              {/* FREE Setup badge */}
+              <motion.div
+                className="inline-flex items-center gap-2 bg-[#FFD700] text-gray-900 font-bold text-sm px-5 py-2 rounded-full mb-6 shadow-lg shadow-yellow-500/30 tracking-wide uppercase"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <Sparkles className="w-4 h-4" />
+                FREE Setup · No Activation Fee
+              </motion.div>
+
+              <motion.p
                 className="text-sm md:text-base font-semibold tracking-widest uppercase text-white mb-2"
-                style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)' }}
+                style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
               >
                 Built For The Ultimate Vendor
               </motion.p>
 
-              <motion.h1 
+              <motion.h1
                 className="hero-title"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
               >
                 Turn Walk-By Traffic Into Paying Customers.
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 className="hero-subtitle"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
               >
                 Scan items, generate QR codes instantly, and capture customer leads on the spot — so you can follow up, close more sales, and bring buyers back.
               </motion.p>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex flex-col items-center w-full mt-4"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
               >
                 <div className="hero-actions">
-                  <Button 
-                    asChild
-                    className="hero-btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/20 hover:-translate-y-1"
-                  >
-                    <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
-                      Start Free Trial
-                    </a>
+                  <Button asChild className="hero-btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/20 hover:-translate-y-1">
+                    <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">Start Free Trial</a>
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="hero-btn border-2 border-white/80 text-white bg-black/20 backdrop-blur-sm hover:bg-white hover:text-black hover:-translate-y-1"
-                    onClick={scrollToHowItWorks}
-                  >
+                  <Button variant="outline" className="hero-btn border-2 border-white/80 text-white bg-black/20 backdrop-blur-sm hover:bg-white hover:text-black hover:-translate-y-1" onClick={scrollToHowItWorks}>
                     See How It Works
                   </Button>
                 </div>
                 <div className="flex flex-col items-center mt-6 space-y-1 text-white/70 text-sm font-medium drop-shadow-md">
-                  <span>7 days free, then $19/month</span>
-                  <span className="flex items-center gap-1.5 opacity-80">
-                    <Shield className="w-3.5 h-3.5" /> Secure checkout powered by Stripe
-                  </span>
+                  <span>7 days free, then from $49/month</span>
+                  <span className="flex items-center gap-1.5 opacity-80"><Shield className="w-3.5 h-3.5" /> Secure checkout powered by Stripe</span>
                 </div>
               </motion.div>
             </div>
@@ -261,33 +160,16 @@ const HomePage = () => {
           <section id="how-it-works" className="section-padding how-it-works-section-bg">
             <AnimatedBackground />
             <div className="how-it-works-top-bleed"></div>
-            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-z-index">
-              <motion.div 
-                className="text-center mb-20"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-white">How Vendorfy Helps You Sell More.</h2>
+              <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-[#FFD700]">How Vendorfy Helps You Sell More.</h2>
                 <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto">A simple QR-powered selling system built for swap meets, markets, and live events.</p>
               </motion.div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
                 {steps.map((step, index) => (
-                  <motion.div
-                    key={index}
-                    className="relative"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
+                  <motion.div key={index} className="relative" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }}>
                     <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl step-card-polished hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
-                      <div className="flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-full mb-8 font-bold text-xl">
-                        {index + 1}
-                      </div>
+                      <div className="flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-full mb-8 font-bold text-xl">{index + 1}</div>
                       <step.icon className="w-12 h-12 text-primary mb-6" style={{ marginBottom: 'var(--step-icon-mb)' }} />
                       <h3 className="step-title-polished text-foreground">{step.title}</h3>
                       <p className="text-muted-foreground text-base leading-relaxed">{step.description}</p>
@@ -298,34 +180,19 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Why Vendors Are Switching to Vendorfy Section */}
+          {/* Why Vendors Are Switching Section */}
           <section className="section-padding relative benefits-gradient-bg overflow-hidden">
             <div className="benefits-top-divider"></div>
             <div className="benefits-glow-line"></div>
-            
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <motion.div 
-                className="text-center mb-16 relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
+              <motion.div className="text-center mb-16 relative" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <div className="benefits-heading-glow"></div>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-white relative z-10">Why Vendors Are Switching to Vendorfy</h2>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-[#FFD700] relative z-10">Why Vendors Are Switching to Vendorfy</h2>
                 <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto relative z-10">More sales. Less manual work. A smarter way to run your business.</p>
               </motion.div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    className="benefit-card-premium backdrop-blur-md rounded-2xl p-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
+                  <motion.div key={index} className="benefit-card-premium backdrop-blur-md rounded-2xl p-8" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }}>
                     <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                       <benefit.icon className="w-7 h-7 text-primary" />
                     </div>
@@ -337,7 +204,7 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Features Section */}
+          {/* Powerful Features Section */}
           <section className="section-padding relative overflow-hidden bg-[#030108] border-t border-white/5">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2d1b69] via-[#0a0514] to-[#030108] opacity-60"></div>
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')] opacity-[0.04] mix-blend-screen pointer-events-none"></div>
@@ -348,29 +215,14 @@ const HomePage = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-              <motion.div 
-                className="text-center mb-20"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]">Powerful Features</h2>
+              <motion.div className="text-center mb-20" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-[#FFD700]">Powerful Features</h2>
                 <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto drop-shadow-md">Everything you need to increase sales and maximize profit</p>
               </motion.div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-full pointer-events-none"></div>
-                
                 {features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 relative z-10"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
+                  <motion.div key={index} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 relative z-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }}>
                     <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                       <feature.icon className="w-7 h-7 text-primary" />
                     </div>
@@ -385,27 +237,13 @@ const HomePage = () => {
           {/* Perfect For Section */}
           <section className="section-padding perfect-for-bg border-y border-white/10 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 content-z-index">
-              <motion.div 
-                className="text-center mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-white drop-shadow-lg">Perfect For</h2>
+              <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-[#FFD700] drop-shadow-lg">Perfect For</h2>
                 <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto drop-shadow-md">Designed for vendors who hustle</p>
               </motion.div>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {useCases.map((useCase, index) => (
-                  <motion.div
-                    key={index}
-                    className="perfect-for-card backdrop-blur-md rounded-2xl p-8 text-center transition-all duration-300 group"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
+                  <motion.div key={index} className="perfect-for-card backdrop-blur-md rounded-2xl p-8 text-center transition-all duration-300 group" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: index * 0.1 }}>
                     <div className="w-16 h-16 mx-auto rounded-full bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <useCase.icon className="w-8 h-8 text-primary" />
                     </div>
@@ -416,103 +254,57 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Vendor Signup Section */}
-          <section id="signup" className="section-padding relative overflow-hidden bg-[#05020a] border-y border-white/10">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1e1045] via-[#0a0514] to-[#030108] opacity-90"></div>
+          {/* Get Started Today / Signup Section */}
+          <section id="signup" className="section-padding relative overflow-hidden bg-[#0d0820] border-y border-white/10">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#2a1860] via-[#120a30] to-[#0d0820] opacity-90"></div>
             <div className="absolute inset-0 glow-texture pointer-events-none"></div>
-            <div className="absolute top-0 left-1/4 w-[150%] h-[120px] light-beam pointer-events-none opacity-70" style={{ transform: 'rotate(-35deg) translateY(-50%)' }}></div>
-            <div className="absolute bottom-0 right-1/4 w-[150%] h-[150px] light-beam pointer-events-none opacity-50" style={{ transform: 'rotate(45deg) translateY(50%)' }}></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] glow-layer-3 pointer-events-none"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] glow-layer-2 pointer-events-none"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] glow-layer-1 pointer-events-none"></div>
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[400px] h-[400px] radial-burst pointer-events-none"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] glow-intense pointer-events-none opacity-60"></div>
+            <div className="absolute top-0 left-1/4 w-[150%] h-[120px] light-beam pointer-events-none opacity-40" style={{ transform: 'rotate(-35deg) translateY(-50%)' }}></div>
+            <div className="absolute bottom-0 right-1/4 w-[150%] h-[150px] light-beam pointer-events-none opacity-30" style={{ transform: 'rotate(45deg) translateY(50%)' }}></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] glow-layer-3 pointer-events-none"></div>
 
-            <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 content-z-index relative z-10">
-              <motion.div 
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-white drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">Get Started Today</h2>
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 content-z-index relative z-10">
+              <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 tracking-tight text-[#FFD700]">Get Started Today</h2>
                 <p className="text-lg md:text-xl text-white/80 drop-shadow-md">Join the future of vendor sales</p>
               </motion.div>
 
-              <motion.form 
-                onSubmit={handleSubmit}
-                className="bg-card/80 backdrop-blur-md border border-border/50 rounded-2xl p-8 md:p-10 shadow-2xl shadow-black/50 space-y-6 relative overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <div className="space-y-2 relative z-10">
-                  <Label htmlFor="name" className="text-foreground font-medium">Name</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Your full name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
-                  />
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+                {/* Form */}
+                <motion.form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl shadow-black/50 space-y-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+                  <div className="space-y-2">
+                    <Label htmlFor="name" className="text-foreground font-medium">Name</Label>
+                    <Input id="name" name="name" type="text" placeholder="Your full name" value={formData.name} onChange={handleInputChange} required className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-foreground font-medium">Phone</Label>
+                    <Input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" value={formData.phone} onChange={handleInputChange} required className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
+                    <Input id="email" name="email" type="email" placeholder="you@example.com" value={formData.email} onChange={handleInputChange} required className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="vendorName" className="text-foreground font-medium">Vendor/Booth Name</Label>
+                    <Input id="vendorName" name="vendorName" type="text" placeholder="Your business name" value={formData.vendorName} onChange={handleInputChange} required className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12" />
+                  </div>
+                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 mt-4 transition-all duration-300 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed">
+                    {isSubmitting ? 'Redirecting...' : 'Continue to Secure Checkout'}
+                  </Button>
+                </motion.form>
 
-                <div className="space-y-2 relative z-10">
-                  <Label htmlFor="phone" className="text-foreground font-medium">Phone</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    placeholder="(555) 123-4567"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
-                  />
-                </div>
-
-                <div className="space-y-2 relative z-10">
-                  <Label htmlFor="email" className="text-foreground font-medium">Email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
-                  />
-                </div>
-
-                <div className="space-y-2 relative z-10">
-                  <Label htmlFor="vendorName" className="text-foreground font-medium">Vendor/Booth Name</Label>
-                  <Input
-                    id="vendorName"
-                    name="vendorName"
-                    type="text"
-                    placeholder="Your business name"
-                    value={formData.vendorName}
-                    onChange={handleInputChange}
-                    required
-                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
-                  />
-                </div>
-
-                <Button 
-                  type="submit" 
-                  size="lg" 
-                  disabled={isSubmitting}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 mt-4 transition-all duration-300 shadow-lg shadow-primary/20 relative z-10 disabled:opacity-70 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Redirecting...' : 'Continue to Secure Checkout'}
-                </Button>
-              </motion.form>
+                {/* QR Code panel */}
+                <motion.div className="flex flex-col items-center justify-center gap-6 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
+                  <p className="text-white/80 text-lg font-medium">Or scan to get started instantly</p>
+                  <div className="bg-white rounded-2xl p-4 shadow-xl shadow-black/40 w-48 h-48 flex items-center justify-center">
+                    <QrCode className="w-36 h-36 text-gray-900" strokeWidth={1.2} />
+                  </div>
+                  <p className="text-white/50 text-sm max-w-xs">Point your phone camera at this QR code to open the Vendorfy sign-up page instantly.</p>
+                  <div className="inline-flex items-center gap-2 bg-[#FFD700]/10 border border-[#FFD700]/30 text-[#FFD700] font-bold text-sm px-5 py-2.5 rounded-full tracking-wide">
+                    <Sparkles className="w-4 h-4" />
+                    FREE Setup · No Activation Fee
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </section>
 
@@ -527,30 +319,14 @@ const HomePage = () => {
             <div className="absolute top-1/2 left-0 w-full h-[40px] light-streak-horizontal pointer-events-none z-0"></div>
 
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-              <motion.div
-                className="text-center mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-2xl">
-                  Start Selling Smarter Today
-                </h2>
-                <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-                  Set up your products, generate QR codes, and start capturing customers in minutes.
-                </p>
+              <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-2xl">Start Selling Smarter Today</h2>
+                <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed drop-shadow-md">Set up your products, generate QR codes, and start capturing customers in minutes.</p>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 {/* Starter */}
-                <motion.div
-                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
+                <motion.div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
                   <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary/10 rounded-full blur-[50px] pointer-events-none"></div>
                   <div className="relative z-10 flex flex-col flex-1">
                     <div className="mb-8">
@@ -576,13 +352,7 @@ const HomePage = () => {
                 </motion.div>
 
                 {/* Pro */}
-                <motion.div
-                  className="bg-primary/10 backdrop-blur-xl border border-primary/30 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.1)]"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
+                <motion.div className="bg-primary/10 backdrop-blur-xl border border-primary/30 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.1)]" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
                   <div className="absolute -top-20 -left-20 w-48 h-48 bg-primary/20 rounded-full blur-[50px] pointer-events-none"></div>
                   <div className="absolute top-4 right-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full tracking-wide">Most Popular</div>
                   <div className="relative z-10 flex flex-col flex-1">
@@ -610,18 +380,77 @@ const HomePage = () => {
               </div>
             </div>
           </section>
+
+          {/* Refer a Vendor Section */}
+          <section className="section-padding relative overflow-hidden bg-[#0a0514] border-t border-white/5">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1a0d3a] via-[#0a0514] to-[#050208] opacity-90"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary font-bold text-sm px-5 py-2 rounded-full mb-8 tracking-wide uppercase">
+                  <Gift className="w-4 h-4" />
+                  Referral Reward
+                </div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 tracking-tight text-[#FFD700]">Refer a Vendor, Get 1 Month FREE</h2>
+                <p className="text-lg md:text-xl text-white/70 mb-4 max-w-2xl mx-auto leading-relaxed">
+                  Know another vendor who could use Vendorfy? Send them your referral link and when they sign up, you both win — you get a free month added to your account automatically.
+                </p>
+                <p className="text-sm text-white/40 mb-10">Terms and conditions may apply. See customer details.</p>
+                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-10 py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.2)] hover:shadow-[0_0_35px_rgba(250,204,21,0.35)] transition-all duration-300">
+                  <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
+                    <Gift className="w-5 h-5 mr-2" />
+                    Get My Referral Link
+                  </a>
+                </Button>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* Google Review Section */}
+          <section className="section-padding relative overflow-hidden bg-[#07030f] border-t border-white/5">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#120830] via-[#07030f] to-[#030108] opacity-80"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-yellow-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                <div className="flex justify-center gap-1 mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-7 h-7 text-[#FFD700] fill-[#FFD700]" />
+                  ))}
+                </div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 tracking-tight text-[#FFD700]">Leave Us a Google Review → Get 1 Month FREE</h2>
+                <p className="text-lg md:text-xl text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
+                  Loved your experience with Vendorfy? Leave us a Google review and send us a screenshot — we'll add a free month to your account. It's our way of saying thank you.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-10 py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.2)] hover:shadow-[0_0_35px_rgba(250,204,21,0.35)] transition-all duration-300">
+                    <a href="https://g.page/r/review" target="_blank" rel="noopener noreferrer">
+                      <Star className="w-5 h-5 mr-2 fill-current" />
+                      Leave a Google Review
+                    </a>
+                  </Button>
+                  <Button asChild size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 text-lg px-10 py-6 rounded-2xl font-semibold">
+                    <a href={`mailto:info@vendorfyai.com?subject=Google Review Screenshot`}>
+                      Email Us Your Screenshot
+                    </a>
+                  </Button>
+                </div>
+                <p className="text-sm text-white/40 mt-6">After submitting your review, email a screenshot to info@vendorfyai.com to claim your free month.</p>
+              </motion.div>
+            </div>
+          </section>
+
         </main>
 
         {/* Footer */}
-        <footer className="py-12 bg-[#0a0a0a] border-t border-white/5">
+        <footer className="py-16 bg-[#0a0a0a] border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-            <button 
-              onClick={scrollToTop}
-              className="text-2xl font-bold text-primary tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
-            >
+            <button onClick={scrollToTop} className="text-4xl md:text-5xl font-extrabold text-[#FFD700] tracking-tight hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md">
               Vendorfy AI
             </button>
-            <span className="text-base md:text-lg font-medium text-muted-foreground mt-2">Tag it. Scan it. Sell it.</span>
+            <p className="text-sm text-white/40 mt-1">A Monkee Biz AI Company</p>
+            <span className="text-base md:text-lg font-bold text-[#FFD700] mt-3">Tag It. Scan It. Sell It.</span>
             <p className="text-sm text-muted-foreground/80 mt-2">Powered by Manologics</p>
             <div className="flex flex-col space-y-2 mt-6 text-sm text-muted-foreground">
               <p>
@@ -636,7 +465,7 @@ const HomePage = () => {
               <button onClick={() => handlePlaceholderLink('Privacy policy')} className="hover:text-primary transition-colors">Privacy Policy</button>
               <button onClick={() => handlePlaceholderLink('Terms of service')} className="hover:text-primary transition-colors">Terms of Service</button>
             </div>
-            <p className="text-sm text-muted-foreground/60 mt-6">A Monkee Bizznus Company</p>
+            <p className="text-sm text-muted-foreground/50 mt-6">Manologics © 2025</p>
           </div>
         </footer>
 

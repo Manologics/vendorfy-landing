@@ -48,7 +48,7 @@ const Header = () => {
           {/* Logo */}
           <button 
             onClick={scrollToTop}
-            className="text-xl md:text-2xl font-bold text-white tracking-tight hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
+            className="text-xl md:text-2xl font-bold text-[#FFD700] tracking-tight hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md"
           >
             Vendorfy AI
           </button>
