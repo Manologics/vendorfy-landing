@@ -284,7 +284,7 @@ const HomePage = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                   >
-                    <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl step-card-polished hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
+                    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl step-card-polished hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300">
                       <div className="flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-full mb-8 font-bold text-xl">
                         {index + 1}
                       </div>
@@ -365,7 +365,7 @@ const HomePage = () => {
                 {features.map((feature, index) => (
                   <motion.div
                     key={index}
-                    className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-8 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 relative z-10"
+                    className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 relative z-10"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -458,7 +458,7 @@ const HomePage = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="bg-input/50 text-foreground placeholder:text-muted-foreground border-border/50 focus:border-primary focus:ring-1 focus:ring-primary h-12"
+                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
                   />
                 </div>
 
@@ -472,7 +472,7 @@ const HomePage = () => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     required
-                    className="bg-input/50 text-foreground placeholder:text-muted-foreground border-border/50 focus:border-primary focus:ring-1 focus:ring-primary h-12"
+                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
                   />
                 </div>
 
@@ -486,7 +486,7 @@ const HomePage = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="bg-input/50 text-foreground placeholder:text-muted-foreground border-border/50 focus:border-primary focus:ring-1 focus:ring-primary h-12"
+                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
                   />
                 </div>
 
@@ -500,7 +500,7 @@ const HomePage = () => {
                     value={formData.vendorName}
                     onChange={handleInputChange}
                     required
-                    className="bg-input/50 text-foreground placeholder:text-muted-foreground border-border/50 focus:border-primary focus:ring-1 focus:ring-primary h-12"
+                    className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12"
                   />
                 </div>
 
@@ -516,7 +516,7 @@ const HomePage = () => {
             </div>
           </section>
 
-          {/* Final CTA Section */}
+          {/* Pricing Section */}
           <section className="pb-24 md:pb-32 pt-32 md:pt-48 relative overflow-hidden bg-gradient-to-b from-[#1a1638] to-[#0a0a0a]">
             <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-background to-transparent pointer-events-none z-10"></div>
             <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
@@ -525,10 +525,10 @@ const HomePage = () => {
             <div className="absolute top-1/4 left-0 w-[150%] h-[100px] light-streak-diagonal pointer-events-none z-0"></div>
             <div className="absolute bottom-1/4 right-0 w-[150%] h-[80px] light-streak-diagonal pointer-events-none z-0" style={{ transform: 'rotate(135deg)' }}></div>
             <div className="absolute top-1/2 left-0 w-full h-[40px] light-streak-horizontal pointer-events-none z-0"></div>
-            
+
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-              <motion.div 
-                className="text-center"
+              <motion.div
+                className="text-center mb-16"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -537,69 +537,83 @@ const HomePage = () => {
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight text-white drop-shadow-2xl">
                   Start Selling Smarter Today
                 </h2>
-                <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
+                <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
                   Set up your products, generate QR codes, and start capturing customers in minutes.
                 </p>
-
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-16">
-                  {[
-                    'Create listings instantly',
-                    'Turn every item into a smart store',
-                    'Capture buyers and bring them back'
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3 text-white/90 text-lg drop-shadow-sm">
-                      <CheckCircle2 className="w-6 h-6 text-primary shrink-0" />
-                      <span className="font-medium">{item}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="bg-card/40 backdrop-blur-xl border border-border/50 rounded-3xl p-8 md:p-12 max-w-3xl mx-auto layered-depth-card relative overflow-hidden">
-                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-[60px] pointer-events-none"></div>
-                  <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/20 rounded-full blur-[60px] pointer-events-none"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex flex-col items-center gap-6 mb-10">
-                      <div className="text-4xl md:text-5xl font-bold text-white flex items-baseline gap-2 drop-shadow-lg">
-                        $19<span className="text-xl md:text-2xl text-white/70 font-medium">/month</span>
-                      </div>
-                      <button 
-                        onClick={handleReferralClick}
-                        className="inline-flex items-center gap-2 bg-primary/15 text-primary px-5 py-2.5 rounded-full text-sm md:text-base font-bold tracking-wide border border-primary/20 shadow-[0_0_15px_rgba(250,204,21,0.15)] hover:bg-primary/25 transition-colors"
-                      >
-                        <Sparkles className="w-5 h-5" />
-                        Refer a vendor → get 1 month FREE
-                      </button>
-                    </div>
-
-                    <Button 
-                      asChild
-                      size="lg" 
-                      className="w-full sm:w-auto min-w-[320px] bg-primary text-primary-foreground hover:bg-primary/90 text-xl py-8 rounded-2xl shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(250,204,21,0.5)] hover:-translate-y-1 transition-all duration-300 font-bold"
-                    >
-                      <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
-                        Start Your 7-Day Free Trial
-                      </a>
-                    </Button>
-
-                    <div className="flex flex-col items-center mt-6 space-y-2">
-                      <p className="text-sm md:text-base text-white/80 font-medium">
-                        Cancel anytime
-                      </p>
-                      <p className="text-sm md:text-base text-white/60 flex items-center justify-center gap-2 font-medium">
-                        <Shield className="w-4 h-4" />
-                        No contracts. No setup fees.
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                {/* Starter */}
+                <motion.div
+                  className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  <div className="absolute -top-20 -right-20 w-48 h-48 bg-primary/10 rounded-full blur-[50px] pointer-events-none"></div>
+                  <div className="relative z-10 flex flex-col flex-1">
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-5xl font-extrabold text-white">$49</span>
+                        <span className="text-white/60 text-lg font-medium">/month</span>
+                      </div>
+                    </div>
+                    <ul className="space-y-3 mb-10 flex-1">
+                      {['Up to 100 active products', 'Barcode scan + AI listing builder', 'QR code generation', 'Public product pages', 'Lead capture + basic dashboard', 'CSV export · Mobile-optimized'].map((item, i) => (
+                        <li key={i} className="flex items-center gap-3 text-white/80">
+                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button asChild size="lg" variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 text-lg py-6 rounded-2xl font-semibold">
+                      <a href="https://buy.stripe.com/4gMfZjcwjeoSeYifXxgQE01" target="_blank" rel="noopener noreferrer">Get Starter</a>
+                    </Button>
+                    <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
+                  </div>
+                </motion.div>
+
+                {/* Pro */}
+                <motion.div
+                  className="bg-primary/10 backdrop-blur-xl border border-primary/30 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col shadow-[0_0_40px_rgba(250,204,21,0.1)]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div className="absolute -top-20 -left-20 w-48 h-48 bg-primary/20 rounded-full blur-[50px] pointer-events-none"></div>
+                  <div className="absolute top-4 right-4 bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full tracking-wide">Most Popular</div>
+                  <div className="relative z-10 flex flex-col flex-1">
+                    <div className="mb-8">
+                      <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-5xl font-extrabold text-white">$99</span>
+                        <span className="text-white/60 text-lg font-medium">/month</span>
+                      </div>
+                    </div>
+                    <ul className="space-y-3 mb-10 flex-1">
+                      {['Unlimited products', 'Everything in Starter', 'AI photo background removal', 'Priority AI processing', 'Advanced inventory tracking', 'Full lead history + export', 'Early access to new features', 'Priority support'].map((item, i) => (
+                        <li key={i} className="flex items-center gap-3 text-white/80">
+                          <CheckCircle2 className="w-5 h-5 text-primary shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.25)] hover:shadow-[0_0_35px_rgba(250,204,21,0.4)] transition-all duration-300">
+                      <a href="https://buy.stripe.com/3cI4gBfIv1C65nI5iTgQE02" target="_blank" rel="noopener noreferrer">Get Pro</a>
+                    </Button>
+                    <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </section>
         </main>
 
         {/* Footer */}
-        <footer className="py-12 bg-card/30 border-t border-border/40">
+        <footer className="py-12 bg-[#0a0a0a] border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
             <button 
               onClick={scrollToTop}
@@ -608,7 +622,7 @@ const HomePage = () => {
               Vendorfy AI
             </button>
             <span className="text-base md:text-lg font-medium text-muted-foreground mt-2">Tag it. Scan it. Sell it.</span>
-            <p className="text-sm text-muted-foreground/80 mt-2">Powered by MonkeeBizAI.com</p>
+            <p className="text-sm text-muted-foreground/80 mt-2">Powered by Manologics</p>
             <div className="flex flex-col space-y-2 mt-6 text-sm text-muted-foreground">
               <p>
                 <a href="/" className="hover:text-primary transition-colors">VendorfyAI.com</a> |{' '}
