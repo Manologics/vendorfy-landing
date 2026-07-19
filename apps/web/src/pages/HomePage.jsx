@@ -9,7 +9,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import Header from '@/components/Header.jsx';
 
-const STRIPE_CHECKOUT_URL = 'https://app.vendorfyai.com';
+const PRICING_SECTION_ID = 'pricing';
 
 const AnimatedBackground = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -31,16 +31,18 @@ const AnimatedBackground = () => (
 const HomePage = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', vendorName: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnnual, setIsAnnual] = useState(false);
 
   const handleInputChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const scrollToPricing = () => {
+    const el = document.getElementById(PRICING_SECTION_ID);
+    if (el) window.scrollTo({ behavior: 'smooth', top: el.offsetTop });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    toast({ title: 'Redirecting to secure checkout...', description: 'Opening Stripe in a new tab.' });
-    setTimeout(() => { window.open(STRIPE_CHECKOUT_URL, '_blank'); setIsSubmitting(false); }, 1500);
+    scrollToPricing();
   };
 
   const scrollToHowItWorks = () => {
@@ -142,8 +144,8 @@ const HomePage = () => {
                 transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
               >
                 <div className="hero-actions">
-                  <Button asChild className="hero-btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/20 hover:-translate-y-1">
-                    <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+                  <Button className="hero-btn bg-primary text-primary-foreground hover:bg-primary/90 shadow-xl shadow-primary/20 hover:-translate-y-1" onClick={scrollToPricing}>
+                    Start Free Trial
                   </Button>
                   <Button variant="outline" className="hero-btn border-2 border-white/80 text-white bg-black/20 backdrop-blur-sm hover:bg-white hover:text-black hover:-translate-y-1" onClick={scrollToHowItWorks}>
                     See How It Works
@@ -288,8 +290,8 @@ const HomePage = () => {
                     <Label htmlFor="vendorName" className="text-foreground font-medium">Vendor/Booth Name</Label>
                     <Input id="vendorName" name="vendorName" type="text" placeholder="Your business name" value={formData.vendorName} onChange={handleInputChange} required className="bg-white/5 text-foreground placeholder:text-white/30 border-white/10 focus:border-primary focus:ring-1 focus:ring-primary h-12" />
                   </div>
-                  <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 mt-4 transition-all duration-300 shadow-lg shadow-primary/20 disabled:opacity-70 disabled:cursor-not-allowed">
-                    {isSubmitting ? 'Redirecting...' : 'Continue to Secure Checkout'}
+                  <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 mt-4 transition-all duration-300 shadow-lg shadow-primary/20">
+                    View Pricing Plans
                   </Button>
                 </motion.form>
 
@@ -310,7 +312,7 @@ const HomePage = () => {
           </section>
 
           {/* Pricing Section */}
-          <section className="pb-24 md:pb-32 pt-32 md:pt-48 relative overflow-hidden bg-gradient-to-b from-[#1a1638] to-[#0a0a0a]">
+          <section id="pricing" className="pb-24 md:pb-32 pt-32 md:pt-48 relative overflow-hidden bg-gradient-to-b from-[#1a1638] to-[#0a0a0a]">
             <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-background to-transparent pointer-events-none z-10"></div>
             <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] intense-radial-glow pointer-events-none z-0"></div>
@@ -416,11 +418,9 @@ const HomePage = () => {
                   Know another vendor who could use Vendorfy? Send them your referral link and when they sign up, you both win — you get a free month added to your account automatically.
                 </p>
                 <p className="text-sm text-white/40 mb-10">Terms and conditions may apply. See customer details.</p>
-                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-10 py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.2)] hover:shadow-[0_0_35px_rgba(250,204,21,0.35)] transition-all duration-300">
-                  <a href={STRIPE_CHECKOUT_URL} target="_blank" rel="noopener noreferrer">
-                    <Gift className="w-5 h-5 mr-2" />
-                    Get My Referral Link
-                  </a>
+                <Button size="lg" onClick={scrollToPricing} className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-10 py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.2)] hover:shadow-[0_0_35px_rgba(250,204,21,0.35)] transition-all duration-300">
+                  <Gift className="w-5 h-5 mr-2" />
+                  Get My Referral Link
                 </Button>
               </motion.div>
             </div>
@@ -444,7 +444,8 @@ const HomePage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-10 py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.2)] hover:shadow-[0_0_35px_rgba(250,204,21,0.35)] transition-all duration-300">
-                    <a href="https://g.page/r/review" target="_blank" rel="noopener noreferrer">
+                    {/* TODO: Replace with real Google review URL */}
+                  <a href="https://g.page/r/REPLACE_WITH_REAL_GOOGLE_REVIEW_URL" target="_blank" rel="noopener noreferrer">
                       <Star className="w-5 h-5 mr-2 fill-current" />
                       Leave a Google Review
                     </a>
@@ -475,7 +476,7 @@ const HomePage = () => {
               <p>
                 <a href="/" className="hover:text-primary transition-colors">VendorfyAI.com</a> |{' '}
                 <a href="mailto:info@vendorfyai.com" className="hover:text-primary transition-colors">info@vendorfyai.com</a> |{' '}
-                <a href="tel:623-282-2252" className="hover:text-primary transition-colors">623-282-2252</a>
+                <a href="tel:623-282-2282" className="hover:text-primary transition-colors">623-282-2282</a>
               </p>
               <p>15333 N Scottsdale Rd, Suite 305</p>
               <p>Scottsdale, AZ 85260</p>
