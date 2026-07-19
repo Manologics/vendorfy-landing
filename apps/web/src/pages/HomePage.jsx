@@ -470,13 +470,13 @@ const HomePage = () => {
               Vendorfy AI
             </button>
             <p className="text-sm text-white/40 mt-1">A Monkee Biz AI Company</p>
-            <span className="text-base md:text-lg font-bold text-[#FFD700] mt-3">Tag It. Scan It. Sell It.</span>
+            <span className="text-base md:text-lg font-bold text-[#FFD700] mt-3">TAG IT • SCAN IT • SELL IT</span>
             <p className="text-sm text-muted-foreground/80 mt-2">Powered by Manologics</p>
             <div className="flex flex-col space-y-2 mt-6 text-sm text-muted-foreground">
               <p>
                 <a href="/" className="hover:text-primary transition-colors">VendorfyAI.com</a> |{' '}
                 <a href="mailto:info@vendorfyai.com" className="hover:text-primary transition-colors">info@vendorfyai.com</a> |{' '}
-                <a href="tel:623-282-2282" className="hover:text-primary transition-colors">623-282-2282</a>
+                <a href="tel:623-300-1709" className="hover:text-primary transition-colors">623-300-1709</a>
               </p>
               <p>15333 N Scottsdale Rd, Suite 305</p>
               <p>Scottsdale, AZ 85260</p>
