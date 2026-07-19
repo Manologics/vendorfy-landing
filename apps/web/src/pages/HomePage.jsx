@@ -365,7 +365,7 @@ const HomePage = () => {
                       ))}
                     </ul>
                     <Button asChild size="lg" variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 text-lg py-6 rounded-2xl font-semibold">
-                      <a href={isAnnual ? 'https://buy.stripe.com/fZu8wR3ZN5Sm7vQ7r1gQE03' : 'https://buy.stripe.com/4gMfZjcwjeoSeYifXxgQE01'} target="_blank" rel="noopener noreferrer">Get Starter</a>
+                      <a href="https://buy.stripe.com/5kQfZgfz2dTTbh55Ez0sU01" target="_blank" rel="noopener noreferrer">Get Starter</a>
                     </Button>
                     <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
                   </div>
@@ -393,7 +393,7 @@ const HomePage = () => {
                       ))}
                     </ul>
                     <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-lg py-6 rounded-2xl font-bold shadow-[0_0_25px_rgba(250,204,21,0.25)] hover:shadow-[0_0_35px_rgba(250,204,21,0.4)] transition-all duration-300">
-                      <a href={isAnnual ? 'https://buy.stripe.com/8x24gB53RdkO5nIcLlgQE04' : 'https://buy.stripe.com/3cI4gBfIv1C65nI5iTgQE02'} target="_blank" rel="noopener noreferrer">Get Pro</a>
+                      <a href="https://buy.stripe.com/4gMbJ086AdTTfxleb50sU02" target="_blank" rel="noopener noreferrer">Get Pro</a>
                     </Button>
                     <p className="text-center text-white/40 text-sm mt-4 flex items-center justify-center gap-1.5"><Shield className="w-3.5 h-3.5" /> Secure checkout via Stripe · Cancel anytime</p>
                   </div>
